@@ -33,10 +33,10 @@ class GoogleAuthenticationMethod extends AbstractAuthenticationMethod
 
     public function authenticate(array $data)
     {
-        // @todo replace with module vars (id and secret)
+        $settings = $this->variableApi->get('ZikulaOAuthModule', 'google');
         $provider = new Google([
-            'clientId' => '1075198165922-b7fgpeocj98k70nq6dln08nknurn20f1.apps.googleusercontent.com',
-            'clientSecret' => 'EXTWWfNFhyVAtJKRmpWTlcij',
+            'clientId' => $settings['id'],
+            'clientSecret' => $settings['secret'],
             'redirectUri' => $this->router->generate('zikulausersmodule_access_login', [], UrlGeneratorInterface::ABSOLUTE_URL),
         ]);
         $request = $this->requestStack->getCurrentRequest();

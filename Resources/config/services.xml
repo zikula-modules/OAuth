@@ -18,6 +18,7 @@
             <argument type="service" id="translator.default" />
             <argument type="service" id="router" />
             <argument type="service" id="zikula_permissions_module.api.permission" />
+            <argument type="service" id="zikula_users_module.internal.authentication_method_collector" />
             <tag name="zikula.link_container" />
         </service>
     </services>

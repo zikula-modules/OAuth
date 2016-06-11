@@ -15,6 +15,7 @@
             <argument type="service" id="request_stack" />
             <argument type="service" id="router" />
             <argument type="service" id="zikula_oauth_module.mapping_repository" />
+            <argument type="service" id="zikula_extensions_module.api.variable" />
             <tag name="zikula.authentication_method" alias="github" />
         </service>
         <service id="zikula_oauth_module.authentication_method.google" class="%zikula_oauth_module.authentication_method.google.class%">
@@ -22,6 +23,7 @@
             <argument type="service" id="request_stack" />
             <argument type="service" id="router" />
             <argument type="service" id="zikula_oauth_module.mapping_repository" />
+            <argument type="service" id="zikula_extensions_module.api.variable" />
             <tag name="zikula.authentication_method" alias="google" />
         </service>
     </services>

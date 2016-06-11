@@ -6,6 +6,7 @@ use Symfony\Component\Routing\RouterInterface;
 use Zikula\Common\Translator\Translator;
 use Zikula\Core\LinkContainer\LinkContainerInterface;
 use Zikula\PermissionsModule\Api\PermissionApi;
+use Zikula\UsersModule\Collector\AuthenticationMethodCollector;
 
 class LinkContainer implements LinkContainerInterface
 {
@@ -23,16 +24,23 @@ class LinkContainer implements LinkContainerInterface
     private $permissionApi;
 
     /**
+     * @var AuthenticationMethodCollector
+     */
+    private $collector;
+
+    /**
      * constructor.
      *
      * @param $translator
      * @param RouterInterface $router
+     * @param PermissionApi $permissionApi
      */
-    public function __construct($translator, RouterInterface $router, PermissionApi $permissionApi)
+    public function __construct($translator, RouterInterface $router, PermissionApi $permissionApi, AuthenticationMethodCollector $collector)
     {
         $this->translator = $translator;
         $this->router = $router;
         $this->permissionApi = $permissionApi;
+        $this->collector = $collector;
     }
 
     /**
@@ -57,38 +65,23 @@ class LinkContainer implements LinkContainerInterface
      *
      * @return array
      */
-//    private function getUser()
-//    {
-//        $links = [];
-//        if ($this->permissionApi->hasPermission('ZikulaOAuthModule::', '::', ACCESS_READ)) {
-//            $links[] = [
-//                'url' => $this->router->generate('zikulaoauthmodule_auth_index'),
-//                'text' => $this->translator->__('Admin'),
-//                'icon' => 'wrench'
-//            ];
-//        }
-//
-//        return $links;
-//    }
+    private function getAdmin()
+    {
+        $links = [];
+        if ($this->permissionApi->hasPermission('ZikulaOAuthModule::', '::', ACCESS_READ)) {
+            $methods = ['github', 'google'];
+            foreach ($methods as $method) {
+                $authMethod = $this->collector->get($method);
+                $links[] = [
+                    'url' => $this->router->generate('zikulaoauthmodule_config_settings', ['method' => $method]),
+                    'text' => $authMethod->getDisplayName() . ' ' . $this->translator->__('settings'),
+                    'icon' => 'wrench'
+                ];
+            }
+        }
 
-    /**
-     * get the Admin links for this extension
-     *
-     * @return array
-     */
-//    private function getAdmin()
-//    {
-//        $links = [];
-//        if ($this->permissionApi->hasPermission('ZikulaOAuthModule::', '::', ACCESS_READ)) {
-//            $links[] = [
-//                'url' => $this->router->generate('zikulaoauthmodule_auth_index'),
-//                'text' => $this->translator->__('Admin'),
-//                'icon' => 'wrench'
-//            ];
-//        }
-//
-//        return $links;
-//    }
+        return $links;
+    }
 
     /**
      * set the BundleName as required buy the interface

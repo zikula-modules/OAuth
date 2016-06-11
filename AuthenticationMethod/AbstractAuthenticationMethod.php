@@ -14,6 +14,7 @@ use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\RouterInterface;
+use Zikula\ExtensionsModule\Api\VariableApi;
 use Zikula\OAuthModule\Entity\Repository\MappingRepository;
 use Zikula\UsersModule\AuthenticationMethodInterface\ReEntrantAuthenticationmethodInterface;
 
@@ -45,19 +46,26 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationme
     protected $repository;
 
     /**
+     * @var VariableApi
+     */
+    protected $variableApi;
+
+    /**
      * AbstractAuthenticationMethod constructor.
      * @param Session $session
      * @param RequestStack $requestStack
      * @param RouterInterface $router
      * @param MappingRepository $repository
+     * @param VariableApi $variableApi
      */
-    public function __construct(Session $session, RequestStack $requestStack, RouterInterface $router, MappingRepository $repository)
+    public function __construct(Session $session, RequestStack $requestStack, RouterInterface $router, MappingRepository $repository, VariableApi $variableApi)
     {
         require_once __DIR__ . '/../vendor/autoload.php';
         $this->session = $session;
         $this->requestStack = $requestStack;
         $this->router = $router;
         $this->repository = $repository;
+        $this->variableApi = $variableApi;
     }
 
     public function getUserData()

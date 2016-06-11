@@ -32,10 +32,10 @@ class GithubAuthenticationMethod extends AbstractAuthenticationMethod
 
     public function authenticate(array $data)
     {
-        // @todo replace with module vars (id and secret)
+        $settings = $this->variableApi->get('ZikulaOAuthModule', 'github');
         $provider = new Github([
-            'clientId' => 'ec6ad84eb2d74acc2b12',
-            'clientSecret' => 'a993eeda820b7c6176e4eb53524f78d464626ff2',
+            'clientId' => $settings['id'],
+            'clientSecret' => $settings['secret'],
             'redirectUri' => $this->router->generate('zikulausersmodule_access_login', [], UrlGeneratorInterface::ABSOLUTE_URL),
         ]);
         $request = $this->requestStack->getCurrentRequest();
