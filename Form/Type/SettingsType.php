@@ -25,11 +25,6 @@ class SettingsType extends AbstractType
             ->add('secret', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
                 'label' => $options['translator']->__('Client secret'),
             ])
-            ->add('enabled', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', [
-                'label' => $options['translator']->__('Enabled'),
-                'required' => false,
-                'data' => true
-            ])
             ->add('save', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', [
                 'label' => $options['translator']->__('Save'),
                 'icon' => 'fa-check',
