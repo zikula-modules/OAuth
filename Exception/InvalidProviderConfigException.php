@@ -8,8 +8,6 @@
 
 namespace Zikula\OAuthModule\Exception;
 
-
 class InvalidProviderConfigException extends \Exception
 {
-    
 }

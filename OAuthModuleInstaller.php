@@ -33,7 +33,6 @@ class OAuthModuleInstaller extends AbstractExtensionInstaller
 
     public function uninstall()
     {
-
         return true;
     }
 }
