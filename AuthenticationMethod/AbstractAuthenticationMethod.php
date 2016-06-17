@@ -12,6 +12,7 @@ namespace Zikula\OAuthModule\AuthenticationMethod;
 
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
+use League\OAuth2\Client\Token\AccessToken;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -52,6 +53,9 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationme
      */
     protected $variableApi;
 
+    /**
+     * @var AccessToken
+     */
     protected $token;
 
     /**
@@ -90,20 +94,37 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationme
         return $this->provider;
     }
 
+    /**
+     * @return string
+     */
     abstract protected function getUserName();
 
+    /**
+     * @return string
+     */
     abstract protected function getEmail();
 
+    /**
+     * @return array
+     */
     protected function getAuthorizationUrlOptions()
     {
         return [];
     }
 
+    /**
+     * Method called during `authenticate` method after token is set.
+     * Allows author to take actions which require the token.
+     */
     protected function setAdditionalUserData()
     {
-        
     }
 
+    /**
+     * Authenticate the user to the provider.
+     * @param array $data
+     * @return integer|null if Zikula Uid is set for provider ID, this is returned, else null.
+     */
     public function authenticate(array $data)
     {
         $redirectUri = isset($data['redirectUri']) ? $data['redirectUri'] : $this->router->generate('zikulausersmodule_access_login', [], UrlGeneratorInterface::ABSOLUTE_URL);
@@ -113,7 +134,7 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationme
         $code = $request->query->get('code', null);
 
         if (!isset($code)) {
-            // If we don't have an authorization code then get one
+            // If no authorization code then get one
             $authUrl = $this->getProvider()->getAuthorizationUrl($this->getAuthorizationUrlOptions());
             $this->session->set('oauth2state', $this->getProvider()->getState());
 

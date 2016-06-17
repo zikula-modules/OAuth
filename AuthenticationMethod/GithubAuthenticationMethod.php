@@ -11,11 +11,13 @@
 namespace Zikula\OAuthModule\AuthenticationMethod;
 
 use League\OAuth2\Client\Provider\Github;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Zikula\OAuthModule\Exception\InvalidProviderConfigException;
 
 class GithubAuthenticationMethod extends AbstractAuthenticationMethod
 {
+    /**
+     * @var string
+     */
     private $email;
 
     public function getDisplayName()
@@ -48,6 +50,8 @@ class GithubAuthenticationMethod extends AbstractAuthenticationMethod
 
     protected function setAdditionalUserData()
     {
+        // this method is needed to get the user's email because github doesn't provide it as a standard
+        // part of the data that is returned as a 'user'.
         $request = $this->getProvider()->getAuthenticatedRequest(
             'GET',
             'https://api.github.com/user/emails',
@@ -60,7 +64,6 @@ class GithubAuthenticationMethod extends AbstractAuthenticationMethod
                 $this->email = $email['email'];
             }
         }
-
     }
 
     protected function setProvider($redirectUri)
