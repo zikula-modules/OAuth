@@ -6,7 +6,7 @@
 {{ adminHeader() }}
 
 <h2><i class="fa fa-wrench"></i> {{ method.DisplayName }} {{ __('Settings') }}</h2>
-<div class="alert alert-info">{{ __f('When setting up your application at %method, set this as the callback url:', {"%method": method.DisplayName}) }}<code>{{ url('zikulausersmodule_access_login') }}</code></div>
+<div class="alert alert-info">{{ __f('When setting up your application at %method, set this as the callback url: ', {"%method": method.DisplayName}) }}<code>{{ url('home') }}</code></div>
 <div class="well">
     {{ form_start(form) }}
     {{ form_errors(form) }}

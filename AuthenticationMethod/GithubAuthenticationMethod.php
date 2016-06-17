@@ -16,6 +16,8 @@ use Zikula\OAuthModule\Exception\InvalidProviderConfigException;
 
 class GithubAuthenticationMethod extends AbstractAuthenticationMethod
 {
+    private $email;
+
     public function getDisplayName()
     {
         return 'Github';
@@ -31,17 +33,47 @@ class GithubAuthenticationMethod extends AbstractAuthenticationMethod
         return $this->user->getNickname();
     }
 
-    protected function getProvider()
+    protected function getEmail()
+    {
+        return $this->email;
+    }
+
+    protected function getAuthorizationUrlOptions()
+    {
+        return [
+            'state' => 'OPTIONAL_CUSTOM_CONFIGURED_STATE',
+            'scope' => ['user:email']
+        ];
+    }
+
+    protected function setAdditionalUserData()
+    {
+        $request = $this->getProvider()->getAuthenticatedRequest(
+            'GET',
+            'https://api.github.com/user/emails',
+            $this->token->getToken()
+        );
+
+        $emails = $this->getProvider()->getResponse($request);
+        foreach ($emails as $email) {
+            if ($email['primary']) {
+                $this->email = $email['email'];
+            }
+        }
+
+    }
+
+    protected function setProvider($redirectUri)
     {
         $settings = $this->variableApi->get('ZikulaOAuthModule', 'github');
         if (!isset($settings['id']) || !isset($settings['secret'])) {
             throw new InvalidProviderConfigException('Invalid settings for Github OAuth provider.');
         }
 
-        return new Github([
+        $this->provider = new Github([
             'clientId' => $settings['id'],
             'clientSecret' => $settings['secret'],
-            'redirectUri' => $this->router->generate('zikulausersmodule_access_login', [], UrlGeneratorInterface::ABSOLUTE_URL),
+            'redirectUri' => $redirectUri,
         ]);
     }
 }

@@ -11,7 +11,6 @@
 namespace Zikula\OAuthModule\AuthenticationMethod;
 
 use League\OAuth2\Client\Provider\Google;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Zikula\OAuthModule\Exception\InvalidProviderConfigException;
 
 class GoogleAuthenticationMethod extends AbstractAuthenticationMethod
@@ -31,7 +30,12 @@ class GoogleAuthenticationMethod extends AbstractAuthenticationMethod
         return $this->user->getName();
     }
 
-    protected function getProvider()
+    protected function getEmail()
+    {
+        return $this->user->getEmail();
+    }
+
+    protected function setProvider($redirectUri)
     {
         $settings = $this->variableApi->get('ZikulaOAuthModule', 'google');
         if (!isset($settings['id']) || !isset($settings['secret'])) {
@@ -41,7 +45,7 @@ class GoogleAuthenticationMethod extends AbstractAuthenticationMethod
         return new Google([
             'clientId' => $settings['id'],
             'clientSecret' => $settings['secret'],
-            'redirectUri' => $this->router->generate('zikulausersmodule_access_login', [], UrlGeneratorInterface::ABSOLUTE_URL),
+            'redirectUri' => $redirectUri,
         ]);
     }
 }

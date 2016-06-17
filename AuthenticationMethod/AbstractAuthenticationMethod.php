@@ -14,6 +14,7 @@ use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Zikula\ExtensionsModule\Api\VariableApi;
 use Zikula\OAuthModule\Entity\Repository\MappingRepository;
@@ -51,6 +52,13 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationme
      */
     protected $variableApi;
 
+    protected $token;
+
+    /**
+     * @var AbstractProvider
+     */
+    protected $provider;
+
     /**
      * AbstractAuthenticationMethod constructor.
      * @param Session $session
@@ -70,23 +78,44 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationme
     }
 
     /**
+     * @param string $redirectUri
+     */
+    abstract protected function setProvider($redirectUri);
+
+    /**
      * @return AbstractProvider
      */
-    abstract protected function getProvider();
+    public function getProvider()
+    {
+        return $this->provider;
+    }
 
     abstract protected function getUserName();
 
+    abstract protected function getEmail();
+
+    protected function getAuthorizationUrlOptions()
+    {
+        return [];
+    }
+
+    protected function setAdditionalUserData()
+    {
+        
+    }
+
     public function authenticate(array $data)
     {
-        $provider = $this->getProvider();
+        $redirectUri = isset($data['redirectUri']) ? $data['redirectUri'] : $this->router->generate('zikulausersmodule_access_login', [], UrlGeneratorInterface::ABSOLUTE_URL);
+        $this->setProvider($redirectUri);
         $request = $this->requestStack->getCurrentRequest();
         $state = $request->query->get('state', null);
         $code = $request->query->get('code', null);
 
         if (!isset($code)) {
             // If we don't have an authorization code then get one
-            $authUrl = $provider->getAuthorizationUrl();
-            $this->session->set('oauth2state', $provider->getState());
+            $authUrl = $this->getProvider()->getAuthorizationUrl($this->getAuthorizationUrlOptions());
+            $this->session->set('oauth2state', $this->getProvider()->getState());
 
             header('Location: ' . $authUrl);
             exit;
@@ -99,13 +128,14 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationme
             return null;
         } else {
             // Try to get an access token (using the authorization code grant)
-            $token = $provider->getAccessToken('authorization_code', [
+            $this->token = $this->getProvider()->getAccessToken('authorization_code', [
                 'code' => $code
             ]);
 
             try {
                 // get the user's details
-                $this->user = $provider->getResourceOwner($token);
+                $this->user = $this->getProvider()->getResourceOwner($this->token);
+                $this->setAdditionalUserData();
                 $this->session->getFlashBag()->add('success', sprintf('Hello %s!', $this->getUserName()));
 
                 return $this->repository->getZikulaId('github', $this->user->getId());
@@ -123,6 +153,10 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationme
             $this->authenticate([]);
         }
 
-        return $this->user->toArray();
+        return [
+            'uname' => $this->getUserName(),
+            'email' => $this->getEmail(),
+            'id' => $this->user->getId()
+        ];
     }
 }
