@@ -11,6 +11,7 @@
 namespace Zikula\OAuthModule\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Zikula\OAuthModule\Entity\MappingEntity;
 
 class MappingRepository extends EntityRepository
 {
@@ -23,5 +24,11 @@ class MappingRepository extends EntityRepository
         } else {
             return null;
         }
+    }
+
+    public function persistAndFlush(MappingEntity $entity)
+    {
+        $this->_em->persist($entity);
+        $this->_em->flush($entity);
     }
 }

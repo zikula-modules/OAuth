@@ -13,11 +13,11 @@ namespace Zikula\OAuthModule\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Mapping
+ * Class MappingEntity
  * @ORM\Entity(repositoryClass="Zikula\OAuthModule\Entity\Repository\MappingRepository")
  * @ORM\Table(name="oauth_mapping")
  */
-class Mapping
+class MappingEntity
 {
     /**
      * @ORM\Id

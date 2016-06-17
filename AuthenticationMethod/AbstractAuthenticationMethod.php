@@ -18,10 +18,12 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Zikula\ExtensionsModule\Api\VariableApi;
+use Zikula\OAuthModule\Entity\MappingEntity;
 use Zikula\OAuthModule\Entity\Repository\MappingRepository;
-use Zikula\UsersModule\AuthenticationMethodInterface\ReEntrantAuthenticationmethodInterface;
+use Zikula\UsersModule\AuthenticationMethodInterface\ReEntrantAuthenticationMethodInterface;
+use Zikula\UsersModule\Entity\UserEntity;
 
-abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationmethodInterface
+abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMethodInterface
 {
     /**
      * @var Session
@@ -97,7 +99,7 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationme
     /**
      * @return string
      */
-    abstract protected function getUserName();
+    abstract protected function getUname();
 
     /**
      * @return string
@@ -157,7 +159,7 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationme
                 // get the user's details
                 $this->user = $this->getProvider()->getResourceOwner($this->token);
                 $this->setAdditionalUserData();
-                $this->session->getFlashBag()->add('success', sprintf('Hello %s!', $this->getUserName()));
+                $this->session->getFlashBag()->add('success', sprintf('Hello %s!', $this->getUname()));
 
                 return $this->repository->getZikulaId('github', $this->user->getId());
             } catch (\Exception $e) {
@@ -168,16 +170,27 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationme
         }
     }
 
-    public function getUserData()
+    public function updateUserEntity(UserEntity $userEntity)
+    {
+        $userEntity->setEmail($this->getEmail());
+        $userEntity->setUname($this->getUname());
+    }
+
+    public function getId()
     {
         if (!$this->user) {
             $this->authenticate([]);
         }
 
-        return [
-            'uname' => $this->getUserName(),
-            'email' => $this->getEmail(),
-            'id' => $this->user->getId()
-        ];
+        return $this->user->getId();
+    }
+
+    public function persistMapping($data)
+    {
+        $mapping = new MappingEntity();
+        $mapping->setMethod($data['method']);
+        $mapping->setMethodId($data['id']);
+        $mapping->setZikulaId($data['uid']);
+        $this->repository->persistAndFlush($mapping);
     }
 }

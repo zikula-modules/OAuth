@@ -25,7 +25,7 @@ class GoogleAuthenticationMethod extends AbstractAuthenticationMethod
         return 'Login using Google via OAuth.';
     }
 
-    protected function getUserName()
+    protected function getUname()
     {
         return $this->user->getName();
     }
@@ -42,7 +42,7 @@ class GoogleAuthenticationMethod extends AbstractAuthenticationMethod
             throw new InvalidProviderConfigException('Invalid settings for Google OAuth provider.');
         }
 
-        return new Google([
+        $this->provider = new Google([
             'clientId' => $settings['id'],
             'clientSecret' => $settings['secret'],
             'redirectUri' => $redirectUri,

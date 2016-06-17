@@ -11,7 +11,7 @@
     <services>
         <service id="zikula_oauth_module.mapping_repository" class="%zikula_oauth_module.mapping_repository.class%">
             <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
-            <argument type="string">Zikula\OAuthModule\Entity\Mapping</argument>
+            <argument type="string">Zikula\OAuthModule\Entity\MappingEntity</argument>
         </service>
 
         <service id="zikula_oauth_module.link_container" class="Zikula\OAuthModule\Container\LinkContainer" lazy="true">
