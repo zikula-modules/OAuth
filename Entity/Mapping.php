@@ -10,7 +10,6 @@
 
 namespace Zikula\OAuthModule\Entity;
 
-
 use Doctrine\ORM\Mapping as ORM;
 
 /**
