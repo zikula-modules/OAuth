@@ -31,4 +31,13 @@ class MappingRepository extends EntityRepository
         $this->_em->persist($entity);
         $this->_em->flush($entity);
     }
+
+    public function removeByZikulaId($uid)
+    {
+        $mapping = parent::findOneBy(['zikulaId' => $uid]);
+        if (isset($mapping)) {
+            $this->_em->remove($mapping);
+            $this->_em->flush();
+        }
+    }
 }

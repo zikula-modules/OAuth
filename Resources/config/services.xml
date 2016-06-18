@@ -6,12 +6,18 @@
 
     <parameters>
         <parameter key="zikula_oauth_module.mapping_repository.class">Zikula\OAuthModule\Entity\Repository\MappingRepository</parameter>
+        <parameter key="zikula_oauth_module.listener.user_delete_listener.class">Zikula\OAuthModule\Listener\UserDeleteListener</parameter>
     </parameters>
 
     <services>
         <service id="zikula_oauth_module.mapping_repository" class="%zikula_oauth_module.mapping_repository.class%">
             <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
             <argument type="string">Zikula\OAuthModule\Entity\MappingEntity</argument>
+        </service>
+
+        <service id="zikula_oauth_module.listener.user_delete_listener" class="%zikula_oauth_module.listener.user_delete_listener.class%">
+            <argument type="service" id="zikula_oauth_module.mapping_repository" />
+            <tag name="kernel.event_subscriber"/>
         </service>
 
         <service id="zikula_oauth_module.link_container" class="Zikula\OAuthModule\Container\LinkContainer" lazy="true">
