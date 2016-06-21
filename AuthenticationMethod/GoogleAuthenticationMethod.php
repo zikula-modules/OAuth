@@ -15,6 +15,11 @@ use Zikula\OAuthModule\Exception\InvalidProviderConfigException;
 
 class GoogleAuthenticationMethod extends AbstractAuthenticationMethod
 {
+    public function getAlias()
+    {
+        return 'google';
+    }
+
     public function getDisplayName()
     {
         return 'Google';

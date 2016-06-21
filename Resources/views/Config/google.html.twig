@@ -1,0 +1,16 @@
+<div class="alert alert-info">
+    <p>{{ __('Application setup at') }}: <a href="https://console.developers.google.com/">https://console.developers.google.com/</a></p>
+
+    {{ __('Add one') }} <code>Authorized JavaScript origins</code>:
+    <ul>
+        <li>{{ app.request.schemeAndHttpHost }}</li>
+    </ul>
+
+    {{ __('Add two') }} <code>Authorized redirect URIs</code>:
+    <ul>
+        <li>{{ url('zikulausersmodule_user_login') }}</li>
+        <li>{{ url('zikulausersmodule_registration_register') }}</li>
+    </ul>
+
+    <strong>{{ __('You must also enable the Google+ Api') }}</strong>
+</div>

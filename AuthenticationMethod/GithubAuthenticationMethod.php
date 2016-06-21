@@ -20,6 +20,11 @@ class GithubAuthenticationMethod extends AbstractAuthenticationMethod
      */
     private $email;
 
+    public function getAlias()
+    {
+        return 'github';
+    }
+
     public function getDisplayName()
     {
         return 'Github';
