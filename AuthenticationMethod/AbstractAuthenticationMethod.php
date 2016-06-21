@@ -161,7 +161,7 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
                 $this->setAdditionalUserData();
                 $this->session->getFlashBag()->add('success', sprintf('Hello %s!', $this->getUname()));
 
-                return $this->repository->getZikulaId('github', $this->user->getId());
+                return $this->repository->getZikulaId($this->getAlias(), $this->user->getId());
             } catch (\Exception $e) {
                 $this->session->getFlashBag()->add('error', 'Could not obtain user details from Github. (' . $e->getMessage() . ')');
 
@@ -179,7 +179,7 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
     public function getId()
     {
         if (!$this->user) {
-            $this->authenticate([]);
+            throw new \LogicException('User must authenticate first.');
         }
 
         return $this->user->getId();
@@ -188,7 +188,7 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
     public function persistMapping($data)
     {
         $mapping = new MappingEntity();
-        $mapping->setMethod($data['method']);
+        $mapping->setMethod($this->getAlias());
         $mapping->setMethodId($data['id']);
         $mapping->setZikulaId($data['uid']);
         $this->repository->persistAndFlush($mapping);
