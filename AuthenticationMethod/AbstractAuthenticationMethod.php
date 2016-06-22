@@ -185,7 +185,7 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
         return $this->user->getId();
     }
 
-    public function persistMapping($data)
+    public function register(array $data)
     {
         $mapping = new MappingEntity();
         $mapping->setMethod($this->getAlias());

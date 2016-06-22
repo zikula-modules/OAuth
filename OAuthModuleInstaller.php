@@ -11,7 +11,7 @@ class OAuthModuleInstaller extends AbstractExtensionInstaller
      * @var array
      */
     private $entities = [
-        'Zikula\OAuthModule\Entity\Mapping'
+        'Zikula\OAuthModule\Entity\MappingEntity'
     ];
 
     public function setBundle(AbstractBundle $bundle)
