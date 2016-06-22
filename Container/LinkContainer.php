@@ -68,7 +68,12 @@ class LinkContainer implements LinkContainerInterface
     private function getAdmin()
     {
         $links = [];
-        if ($this->permissionApi->hasPermission('ZikulaOAuthModule::', '::', ACCESS_READ)) {
+        if ($this->permissionApi->hasPermission('ZikulaOAuthModule::', '::', ACCESS_ADMIN)) {
+            $links[] = [
+                'url' => $this->router->generate('zikulaoauthmodule_mapping_list'),
+                'text' => $this->translator->__('Mapping list'),
+                'icon' => 'list'
+            ];
             $methods = ['github', 'google'];
             foreach ($methods as $method) {
                 $authMethod = $this->collector->get($method);

@@ -5,6 +5,7 @@ namespace Zikula\OAuthModule\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Zikula\Core\Controller\AbstractController;
 use Zikula\ThemeModule\Engine\Annotation\Theme;
 
@@ -23,6 +24,10 @@ class ConfigController extends AbstractController
      */
     public function settingsAction(Request $request, $method = 'github')
     {
+        if (!$this->hasPermission('ZikulaOAuthModule', '::', ACCESS_ADMIN)) {
+            throw new AccessDeniedException();
+        }
+
         $form = $this->createForm('Zikula\OAuthModule\Form\Type\SettingsType', $this->getVar($method, []), [
             'translator' => $this->getTranslator()
         ]);
