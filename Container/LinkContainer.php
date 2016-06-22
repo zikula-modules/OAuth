@@ -3,7 +3,7 @@
 namespace Zikula\OAuthModule\Container;
 
 use Symfony\Component\Routing\RouterInterface;
-use Zikula\Common\Translator\Translator;
+use Zikula\Common\Translator\TranslatorInterface;
 use Zikula\Core\LinkContainer\LinkContainerInterface;
 use Zikula\PermissionsModule\Api\PermissionApi;
 use Zikula\UsersModule\Collector\AuthenticationMethodCollector;
@@ -11,7 +11,7 @@ use Zikula\UsersModule\Collector\AuthenticationMethodCollector;
 class LinkContainer implements LinkContainerInterface
 {
     /**
-     * @var Translator
+     * @var TranslatorInterface
      */
     private $translator;
     /**
@@ -31,11 +31,12 @@ class LinkContainer implements LinkContainerInterface
     /**
      * constructor.
      *
-     * @param $translator
+     * @param TranslatorInterface $translator
      * @param RouterInterface $router
      * @param PermissionApi $permissionApi
+     * @param AuthenticationMethodCollector $collector
      */
-    public function __construct($translator, RouterInterface $router, PermissionApi $permissionApi, AuthenticationMethodCollector $collector)
+    public function __construct(TranslatorInterface $translator, RouterInterface $router, PermissionApi $permissionApi, AuthenticationMethodCollector $collector)
     {
         $this->translator = $translator;
         $this->router = $router;
