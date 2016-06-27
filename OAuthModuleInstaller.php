@@ -2,7 +2,6 @@
 
 namespace Zikula\OAuthModule;
 
-use Zikula\Core\AbstractBundle;
 use Zikula\Core\AbstractExtensionInstaller;
 
 class OAuthModuleInstaller extends AbstractExtensionInstaller
@@ -13,11 +12,6 @@ class OAuthModuleInstaller extends AbstractExtensionInstaller
     private $entities = [
         'Zikula\OAuthModule\Entity\MappingEntity'
     ];
-
-    public function setBundle(AbstractBundle $bundle)
-    {
-        $this->bundle = $bundle;
-    }
 
     public function install()
     {
