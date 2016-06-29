@@ -22,7 +22,7 @@ class GithubAuthenticationMethod extends AbstractAuthenticationMethod
 
     public function getAlias()
     {
-        return 'github';
+        return AbstractAuthenticationMethod::ALIAS_GITHUB;
     }
 
     public function getDisplayName()

@@ -17,7 +17,7 @@ class GoogleAuthenticationMethod extends AbstractAuthenticationMethod
 {
     public function getAlias()
     {
-        return 'google';
+        return AbstractAuthenticationMethod::ALIAS_GOOGLE;
     }
 
     public function getDisplayName()
