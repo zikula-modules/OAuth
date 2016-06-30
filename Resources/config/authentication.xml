@@ -6,9 +6,9 @@
 
     <parameters>
         <parameter key="zikula_oauth_module.authentication_method.github.class">Zikula\OAuthModule\AuthenticationMethod\GithubAuthenticationMethod</parameter>
-        <parameter key="zikula_oauth_module.authentication_method.alias.github.value" type="constant">Zikula\OAuthModule\AuthenticationMethod\AbstractAuthenticationMethod::ALIAS_GITHUB</parameter>
+        <parameter key="zikula_oauth_module.authentication_method.alias.github.value" type="constant">Zikula\OAuthModule\OAuthConstant::ALIAS_GITHUB</parameter>
         <parameter key="zikula_oauth_module.authentication_method.google.class">Zikula\OAuthModule\AuthenticationMethod\GoogleAuthenticationMethod</parameter>
-        <parameter key="zikula_oauth_module.authentication_method.alias.google.value" type="constant">Zikula\OAuthModule\AuthenticationMethod\AbstractAuthenticationMethod::ALIAS_GOOGLE</parameter>
+        <parameter key="zikula_oauth_module.authentication_method.alias.google.value" type="constant">Zikula\OAuthModule\OAuthConstant::ALIAS_GOOGLE</parameter>
     </parameters>
 
     <services>

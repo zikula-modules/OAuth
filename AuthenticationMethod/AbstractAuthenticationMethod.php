@@ -25,9 +25,6 @@ use Zikula\UsersModule\Entity\UserEntity;
 
 abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMethodInterface
 {
-    const ALIAS_GITHUB = 'github';
-    const ALIAS_GOOGLE = 'google';
-
     /**
      * @var Session
      */
@@ -195,5 +192,7 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
         $mapping->setMethodId($data['id']);
         $mapping->setZikulaId($data['uid']);
         $this->repository->persistAndFlush($mapping);
+
+        return true;
     }
 }

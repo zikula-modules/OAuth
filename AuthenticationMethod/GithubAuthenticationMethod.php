@@ -12,6 +12,7 @@ namespace Zikula\OAuthModule\AuthenticationMethod;
 
 use League\OAuth2\Client\Provider\Github;
 use Zikula\OAuthModule\Exception\InvalidProviderConfigException;
+use Zikula\OAuthModule\OAuthConstant;
 
 class GithubAuthenticationMethod extends AbstractAuthenticationMethod
 {
@@ -22,7 +23,7 @@ class GithubAuthenticationMethod extends AbstractAuthenticationMethod
 
     public function getAlias()
     {
-        return AbstractAuthenticationMethod::ALIAS_GITHUB;
+        return OAuthConstant::ALIAS_GITHUB;
     }
 
     public function getDisplayName()

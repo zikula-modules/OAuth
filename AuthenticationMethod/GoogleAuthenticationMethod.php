@@ -12,12 +12,13 @@ namespace Zikula\OAuthModule\AuthenticationMethod;
 
 use League\OAuth2\Client\Provider\Google;
 use Zikula\OAuthModule\Exception\InvalidProviderConfigException;
+use Zikula\OAuthModule\OAuthConstant;
 
 class GoogleAuthenticationMethod extends AbstractAuthenticationMethod
 {
     public function getAlias()
     {
-        return AbstractAuthenticationMethod::ALIAS_GOOGLE;
+        return OAuthConstant::ALIAS_GOOGLE;
     }
 
     public function getDisplayName()
