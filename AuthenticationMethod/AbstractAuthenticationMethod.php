@@ -21,7 +21,6 @@ use Zikula\ExtensionsModule\Api\VariableApi;
 use Zikula\OAuthModule\Entity\MappingEntity;
 use Zikula\OAuthModule\Entity\Repository\MappingRepository;
 use Zikula\UsersModule\AuthenticationMethodInterface\ReEntrantAuthenticationMethodInterface;
-use Zikula\UsersModule\Entity\UserEntity;
 
 abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMethodInterface
 {
@@ -117,7 +116,7 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
      * @param array $data
      * @return integer|null if Zikula Uid is set for provider ID, this is returned, else null.
      */
-    public function authenticate(array $data)
+    public function authenticate(array $data = [])
     {
         $redirectUri = isset($data['redirectUri']) ? $data['redirectUri'] : $this->router->generate('zikulausersmodule_access_login', [], UrlGeneratorInterface::ABSOLUTE_URL);
         $this->setProvider($redirectUri);
