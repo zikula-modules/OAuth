@@ -97,16 +97,6 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
     }
 
     /**
-     * @return string
-     */
-    abstract protected function getUname();
-
-    /**
-     * @return string
-     */
-    abstract protected function getEmail();
-
-    /**
      * @return array
      */
     protected function getAuthorizationUrlOptions()
@@ -168,12 +158,6 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
                 return null;
             }
         }
-    }
-
-    public function updateUserEntity(UserEntity $userEntity)
-    {
-        $userEntity->setEmail($this->getEmail());
-        $userEntity->setUname($this->getUname());
     }
 
     public function getId()

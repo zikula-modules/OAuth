@@ -31,12 +31,12 @@ class GoogleAuthenticationMethod extends AbstractAuthenticationMethod
         return 'Login using Google via OAuth.';
     }
 
-    protected function getUname()
+    public function getUname()
     {
         return $this->user->getName();
     }
 
-    protected function getEmail()
+    public function getEmail()
     {
         return $this->user->getEmail();
     }

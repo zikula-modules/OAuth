@@ -36,12 +36,12 @@ class GithubAuthenticationMethod extends AbstractAuthenticationMethod
         return 'Login using Github via OAuth.';
     }
 
-    protected function getUname()
+    public function getUname()
     {
         return $this->user->getNickname();
     }
 
-    protected function getEmail()
+    public function getEmail()
     {
         return $this->email;
     }
