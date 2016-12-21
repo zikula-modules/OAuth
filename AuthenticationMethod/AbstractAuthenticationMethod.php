@@ -115,7 +115,7 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
     /**
      * Authenticate the user to the provider.
      * @param array $data
-     * @return integer|null if Zikula Uid is set for provider ID, this is returned, else null.
+     * @return integer|null if Zikula Uid is set for provider ID, this is returned, else null
      */
     public function authenticate(array $data = [])
     {
