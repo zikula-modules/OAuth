@@ -29,3 +29,10 @@ services:
         tags:
             - { name: zikula.authentication_method, alias: 'facebook' }
             # the alias should be a class constant in Symfony >=3.2 !php/const:Zikula\OAuthModule\OAuthConstant::ALIAS_FACEBOOK
+
+    zikula_oauth_module.authentication_method.linkedin:
+        parent: zikula_oauth_module.authentication_method.base
+        class: Zikula\OAuthModule\AuthenticationMethod\LinkedInAuthenticationMethod
+        tags:
+            - { name: zikula.authentication_method, alias: 'linkedin' }
+            # the alias should be a class constant in Symfony >=3.2 !php/const:Zikula\OAuthModule\OAuthConstant::ALIAS_LINKEDIN

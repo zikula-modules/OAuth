@@ -14,6 +14,7 @@ namespace Zikula\OAuthModule\Container;
 use Symfony\Component\Routing\RouterInterface;
 use Zikula\Common\Translator\TranslatorInterface;
 use Zikula\Core\LinkContainer\LinkContainerInterface;
+use Zikula\OAuthModule\OAuthConstant;
 use Zikula\PermissionsModule\Api\PermissionApi;
 use Zikula\UsersModule\Collector\AuthenticationMethodCollector;
 
@@ -84,7 +85,7 @@ class LinkContainer implements LinkContainerInterface
                 'text' => $this->translator->__('Mapping list'),
                 'icon' => 'list'
             ];
-            $methods = ['github', 'google', 'facebook'];
+            $methods = [OAuthConstant::ALIAS_GITHUB, OAuthConstant::ALIAS_GOOGLE, OAuthConstant::ALIAS_FACEBOOK, OAuthConstant::ALIAS_LINKEDIN];
             foreach ($methods as $method) {
                 $authMethod = $this->collector->get($method);
                 $links[] = [

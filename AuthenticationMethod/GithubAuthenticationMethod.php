@@ -75,7 +75,7 @@ class GithubAuthenticationMethod extends AbstractAuthenticationMethod
 
     protected function setProvider($redirectUri)
     {
-        $settings = $this->variableApi->get('ZikulaOAuthModule', 'github');
+        $settings = $this->variableApi->get('ZikulaOAuthModule', OAuthConstant::ALIAS_GITHUB);
         if (!isset($settings['id']) || !isset($settings['secret'])) {
             throw new InvalidProviderConfigException('Invalid settings for Github OAuth provider.');
         }

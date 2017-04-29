@@ -24,7 +24,12 @@ class OAuthConstant
     const ALIAS_GOOGLE = 'google';
 
     /**
-     * The alias of the google authentication method.
+     * The alias of the facebook authentication method.
      */
     const ALIAS_FACEBOOK = 'facebook';
+
+    /**
+     * The alias of the linkedIn authentication method.
+     */
+    const ALIAS_LINKEDIN = 'linkedin';
 }

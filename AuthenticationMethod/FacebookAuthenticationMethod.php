@@ -44,7 +44,7 @@ class FacebookAuthenticationMethod extends AbstractAuthenticationMethod
 
     protected function setProvider($redirectUri)
     {
-        $settings = $this->variableApi->get('ZikulaOAuthModule', 'facebook');
+        $settings = $this->variableApi->get('ZikulaOAuthModule', OAuthConstant::ALIAS_FACEBOOK);
         if (!isset($settings['id']) || !isset($settings['secret'])) {
             throw new InvalidProviderConfigException('Invalid settings for Facebook OAuth provider.');
         }

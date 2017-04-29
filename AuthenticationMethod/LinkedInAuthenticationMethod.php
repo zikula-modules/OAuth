@@ -11,30 +11,30 @@
 
 namespace Zikula\OAuthModule\AuthenticationMethod;
 
-use League\OAuth2\Client\Provider\Google;
+use League\OAuth2\Client\Provider\LinkedIn;
 use Zikula\OAuthModule\Exception\InvalidProviderConfigException;
 use Zikula\OAuthModule\OAuthConstant;
 
-class GoogleAuthenticationMethod extends AbstractAuthenticationMethod
+class LinkedInAuthenticationMethod extends AbstractAuthenticationMethod
 {
     public function getAlias()
     {
-        return OAuthConstant::ALIAS_GOOGLE;
+        return OAuthConstant::ALIAS_LINKEDIN;
     }
 
     public function getDisplayName()
     {
-        return 'Google';
+        return 'LinkedIn';
     }
 
     public function getDescription()
     {
-        return 'Login using Google via OAuth.';
+        return 'Login using LinkedIn via OAuth.';
     }
 
     public function getUname()
     {
-        return $this->user->getName();
+        return $this->user->getFirstname() . ' ' . $this->user->getLastName();
     }
 
     public function getEmail()
@@ -44,12 +44,12 @@ class GoogleAuthenticationMethod extends AbstractAuthenticationMethod
 
     protected function setProvider($redirectUri)
     {
-        $settings = $this->variableApi->get('ZikulaOAuthModule', OAuthConstant::ALIAS_GOOGLE);
+        $settings = $this->variableApi->get('ZikulaOAuthModule', OAuthConstant::ALIAS_LINKEDIN);
         if (!isset($settings['id']) || !isset($settings['secret'])) {
-            throw new InvalidProviderConfigException('Invalid settings for Google OAuth provider.');
+            throw new InvalidProviderConfigException('Invalid settings for LinkedIn OAuth provider.');
         }
 
-        $this->provider = new Google([
+        $this->provider = new LinkedIn([
             'clientId' => $settings['id'],
             'clientSecret' => $settings['secret'],
             'redirectUri' => $redirectUri,
