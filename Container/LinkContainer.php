@@ -84,7 +84,7 @@ class LinkContainer implements LinkContainerInterface
                 'text' => $this->translator->__('Mapping list'),
                 'icon' => 'list'
             ];
-            $methods = ['github', 'google'];
+            $methods = ['github', 'google', 'facebook'];
             foreach ($methods as $method) {
                 $authMethod = $this->collector->get($method);
                 $links[] = [

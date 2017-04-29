@@ -22,4 +22,9 @@ class OAuthConstant
      * The alias of the google authentication method.
      */
     const ALIAS_GOOGLE = 'google';
+
+    /**
+     * The alias of the google authentication method.
+     */
+    const ALIAS_FACEBOOK = 'facebook';
 }

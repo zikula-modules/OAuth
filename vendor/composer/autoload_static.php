@@ -7,8 +7,8 @@ namespace Composer\Autoload;
 class ComposerStaticInitbd1f4778e273b44d5745b4e75c5c4117
 {
     public static $files = array (
-        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
+        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         'b45b351e6b6f7487d819961fef2fda77' => __DIR__ . '/..' . '/jakeasmith/http_build_url/src/http_build_url.php',
     );
@@ -45,10 +45,10 @@ class ComposerStaticInitbd1f4778e273b44d5745b4e75c5c4117
         ),
         'League\\OAuth2\\Client\\' => 
         array (
-            0 => __DIR__ . '/..' . '/league/oauth2-client/src',
-            1 => __DIR__ . '/..' . '/league/oauth2-facebook/src',
-            2 => __DIR__ . '/..' . '/league/oauth2-github/src',
-            3 => __DIR__ . '/..' . '/league/oauth2-google/src',
+            0 => __DIR__ . '/..' . '/league/oauth2-google/src',
+            1 => __DIR__ . '/..' . '/league/oauth2-client/src',
+            2 => __DIR__ . '/..' . '/league/oauth2-facebook/src',
+            3 => __DIR__ . '/..' . '/league/oauth2-github/src',
             4 => __DIR__ . '/..' . '/league/oauth2-instagram/src',
             5 => __DIR__ . '/..' . '/league/oauth2-linkedin/src',
         ),

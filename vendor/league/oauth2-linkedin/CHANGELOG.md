@@ -1,6 +1,40 @@
 # Changelog
 All Notable changes to `oauth2-linkedin` will be documented in this file
 
+## 0.4.2 - 2016-11-09
+
+### Added
+- Nothing
+
+### Deprecated
+- Nothing
+
+### Fixed
+- Check if index is set in response during method call
+
+### Removed
+- Nothing
+
+### Security
+- Nothing
+
+## 0.4.1 - 2016-08-06
+
+### Added
+- Update name of resource owner methods to follow "convention".
+
+### Deprecated
+- Nothing
+
+### Fixed
+- Nothing
+
+### Removed
+- Nothing
+
+### Security
+- Nothing
+
 ## 0.4.0 - 2015-08-20
 
 ### Added
