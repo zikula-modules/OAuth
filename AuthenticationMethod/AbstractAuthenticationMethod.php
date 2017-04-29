@@ -149,9 +149,14 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
                 // get the user's details
                 $this->user = $this->getProvider()->getResourceOwner($this->token);
                 $this->setAdditionalUserData();
-                $this->session->getFlashBag()->add('success', sprintf('Hello %s!', $this->getUname()));
+                $uid = $this->repository->getZikulaId($this->getAlias(), $this->user->getId());
+                if (isset($uid)) {
+                    $this->session->getFlashBag()->add('success', sprintf('Hello %s!', $this->getUname()));
+                } else {
+                    $this->session->getFlashBag()->add('error', 'User is not locally registered.');
+                }
 
-                return $this->repository->getZikulaId($this->getAlias(), $this->user->getId());
+                return $uid;
             } catch (\Exception $e) {
                 $this->session->getFlashBag()->add('error', 'Could not obtain user details from Github. (' . $e->getMessage() . ')');
 
