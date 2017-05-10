@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
+use Zikula\Bundle\CoreBundle\HttpKernel\ZikulaKernel;
 use Zikula\ExtensionsModule\Api\VariableApi;
 use Zikula\OAuthModule\Entity\MappingEntity;
 use Zikula\OAuthModule\Entity\Repository\MappingRepository;
@@ -75,7 +76,9 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
      */
     public function __construct(Session $session, RequestStack $requestStack, RouterInterface $router, MappingRepository $repository, VariableApi $variableApi)
     {
-        require_once __DIR__ . '/../vendor/autoload.php';
+        if (version_compare(ZikulaKernel::VERSION, '1.4.3', '>=') && version_compare(ZikulaKernel::VERSION, '1.5.0', '<')) {
+            require_once __DIR__ . '/../vendor/autoload.php';
+        }
         $this->session = $session;
         $this->requestStack = $requestStack;
         $this->router = $router;
