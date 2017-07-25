@@ -154,9 +154,15 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
                 $this->setAdditionalUserData();
                 $uid = $this->repository->getZikulaId($this->getAlias(), $this->user->getId());
                 if (isset($uid)) {
-                    $this->session->getFlashBag()->add('success', sprintf('Hello %s!', $this->getUname()));
+//                    $this->session->getFlashBag()->add('success', sprintf('Hello %s!', $this->getUname()));
                 } else {
-                    $this->session->getFlashBag()->add('error', 'User is not locally registered.');
+                    $registrationUrl = $this->router->generate('zikulausersmodule_registration_register');
+                    $this->session->remove('oauth2state');
+                    $this->session->getFlashBag()->add('error', sprintf(
+                        'This user is not locally registered. You must first %s on this site before logging in with %s',
+                        '<a href=\'' . $registrationUrl . '\'>create a new account</a>',
+                        $this->getDisplayName()
+                    ));
                 }
 
                 return $uid;
