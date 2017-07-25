@@ -154,7 +154,7 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
                 $this->setAdditionalUserData();
                 $uid = $this->repository->getZikulaId($this->getAlias(), $this->user->getId());
                 if (isset($uid)) {
-//                    $this->session->getFlashBag()->add('success', sprintf('Hello %s!', $this->getUname()));
+                    //$this->session->getFlashBag()->add('success', sprintf('Hello %s!', $this->getUname()));
                 } else {
                     $registrationUrl = $this->router->generate('zikulausersmodule_registration_register');
                     $this->session->remove('oauth2state');
