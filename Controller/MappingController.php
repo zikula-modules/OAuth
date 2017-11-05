@@ -24,7 +24,7 @@ class MappingController extends AbstractController
 {
     /**
      * @Route("/list")
-     * @Template
+     * @Template("ZikulaOAuthModule:Mapping:list.html.twig")
      * @Theme("admin")
      */
     public function listAction()

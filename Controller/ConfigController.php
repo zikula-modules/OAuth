@@ -26,7 +26,7 @@ class ConfigController extends AbstractController
     /**
      * @Route("/settings/{method}")
      * @Theme("admin")
-     * @Template
+     * @Template("ZikulaOAuthModule:Config:settings.html.twig")
      * @param Request $request
      * @param string $method
      * @return array
