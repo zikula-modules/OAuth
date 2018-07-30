@@ -136,7 +136,7 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
             header('Location: ' . $authUrl);
             exit;
 
-            // Check given state against previously stored one to mitigate CSRF attack
+        // Check given state against previously stored one to mitigate CSRF attack
         } elseif (empty($state) || ($state !== $this->session->get('oauth2state'))) {
             $this->session->remove('oauth2state');
             $this->session->getFlashBag()->add('error', 'Invalid State');
