@@ -1,20 +1,11 @@
 services:
-    zikula_oauth_module.mapping_repository:
-        class: Zikula\OAuthModule\Entity\Repository\MappingRepository
-        arguments: [Zikula\OAuthModule\Entity\MappingEntity]
-        factory: ['@doctrine.orm.default_entity_manager', getRepository]
-    zikula_oauth_module.listener.user_delete_listener:
-        class: Zikula\OAuthModule\Listener\UserDeleteListener
-        tags:
-            - { name: kernel.event_subscriber }
-        arguments: ['@zikula_oauth_module.mapping_repository']
-    zikula_oauth_module.link_container:
-        class: Zikula\OAuthModule\Container\LinkContainer
-        tags:
-            - { name: zikula.link_container }
-        lazy: true
-        arguments:
-          - '@translator.default'
-          - '@router'
-          - '@zikula_permissions_module.api.permission'
-          - '@zikula_users_module.internal.authentication_method_collector'
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+            $bundle: '@Zikula\OAuthModule\ZikulaOAuthModule'
+
+    Zikula\OAuthModule\:
+        resource: '../../*'
+        exclude: '../../{bootstrap.php,Tests,vendor}'

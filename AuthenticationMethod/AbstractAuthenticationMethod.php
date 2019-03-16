@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
+use Zikula\Common\Translator\TranslatorInterface;
 use Zikula\Bundle\CoreBundle\HttpKernel\ZikulaKernel;
 use Zikula\ExtensionsModule\Api\VariableApi;
 use Zikula\OAuthModule\Entity\MappingEntity;
@@ -26,6 +27,11 @@ use Zikula\UsersModule\AuthenticationMethodInterface\ReEntrantAuthenticationMeth
 
 abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMethodInterface
 {
+    /**
+     * @var TranslatorInterface
+     */
+    protected $translator;
+
     /**
      * @var Session
      */
@@ -68,18 +74,22 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
 
     /**
      * AbstractAuthenticationMethod constructor.
-     * @param Session $session
+     *
+     * @param TranslatorInterface $translator
      * @param RequestStack $requestStack
      * @param RouterInterface $router
      * @param MappingRepository $repository
      * @param VariableApi $variableApi
      */
-    public function __construct(Session $session, RequestStack $requestStack, RouterInterface $router, MappingRepository $repository, VariableApi $variableApi)
-    {
-        if (version_compare(ZikulaKernel::VERSION, '1.4.3', '>=') && version_compare(ZikulaKernel::VERSION, '1.5.0', '<')) {
-            require_once __DIR__ . '/../vendor/autoload.php';
-        }
-        $this->session = $session;
+    public function __construct(
+        TranslatorInterface $translator,
+        RequestStack $requestStack,
+        RouterInterface $router,
+        MappingRepository $repository,
+        VariableApi $variableApi
+    ) {
+        $this->translator = $translator;
+        $this->session = $requestStack->getCurrentRequest()->getSession();
         $this->requestStack = $requestStack;
         $this->router = $router;
         $this->repository = $repository;
@@ -136,7 +146,7 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
             header('Location: ' . $authUrl);
             exit;
 
-        // Check given state against previously stored one to mitigate CSRF attack
+            // Check given state against previously stored one to mitigate CSRF attack
         } elseif (empty($state) || ($state !== $this->session->get('oauth2state'))) {
             $this->session->remove('oauth2state');
             $this->session->getFlashBag()->add('error', 'Invalid State');
@@ -158,16 +168,20 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
                 } else {
                     $registrationUrl = $this->router->generate('zikulausersmodule_registration_register');
                     $this->session->remove('oauth2state');
-                    $this->session->getFlashBag()->add('error', sprintf(
-                        'This user is not locally registered. You must first %s on this site before logging in with %s',
-                        '<a href=\'' . $registrationUrl . '\'>create a new account</a>',
-                        $this->getDisplayName()
-                    ));
+                    $registerLink = '<a href="' . $registrationUrl . '">' . $this->translator->__('create a new account') . '</a>';
+                    $this->session->getFlashBag()->add('error',
+                        $this->translator->__f(
+                            'This user is not locally registered. You must first %registerLink on this site before logging in with %displayName', [
+                                '%registerLink' => $registerLink,
+                                '%displayName' => $this->getDisplayName()
+                            ]
+                        )
+                    );
                 }
 
                 return $uid;
-            } catch (\Exception $e) {
-                $this->session->getFlashBag()->add('error', 'Could not obtain user details from Github. (' . $e->getMessage() . ')');
+            } catch (\Exception $exception) {
+                $this->session->getFlashBag()->add('error', $this->translator->__('Could not obtain user details from external service.') . ' (' . $exception->getMessage() . ')');
 
                 return null;
             }
@@ -177,7 +191,7 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
     public function getId()
     {
         if (!$this->user) {
-            throw new \LogicException('User must authenticate first.');
+            throw new \LogicException($this->translator->__('User must authenticate first.'));
         }
 
         return $this->user->getId();

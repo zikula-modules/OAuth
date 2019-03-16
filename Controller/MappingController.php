@@ -16,6 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Zikula\Core\Controller\AbstractController;
 use Zikula\ThemeModule\Engine\Annotation\Theme;
+use Zikula\OAuthModule\Entity\Repository\MappingRepository;
 
 /**
  * Class MappingController
@@ -26,16 +27,17 @@ class MappingController extends AbstractController
      * @Route("/list")
      * @Template("ZikulaOAuthModule:Mapping:list.html.twig")
      * @Theme("admin")
+     *
+     * @param MappingRepository $mappingRepository
      */
-    public function listAction()
+    public function listAction(MappingRepository $mappingRepository)
     {
         if (!$this->hasPermission('ZikulaOAuthModule', '::', ACCESS_ADMIN)) {
             throw new AccessDeniedException();
         }
-        $mappings = $this->get('zikula_oauth_module.mapping_repository')->findAll();
 
         return [
-            'mappings' => $mappings
+            'mappings' => $mappingRepository->findAll()
         ];
     }
 }

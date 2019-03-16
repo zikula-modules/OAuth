@@ -24,12 +24,12 @@ class FacebookAuthenticationMethod extends AbstractAuthenticationMethod
 
     public function getDisplayName()
     {
-        return 'Facebook';
+        return $this->translator->__('Facebook');
     }
 
     public function getDescription()
     {
-        return 'Login using Facebook via OAuth.';
+        return $this->translator->__('Login using Facebook via OAuth.');
     }
 
     public function getUname()
@@ -46,14 +46,14 @@ class FacebookAuthenticationMethod extends AbstractAuthenticationMethod
     {
         $settings = $this->variableApi->get('ZikulaOAuthModule', OAuthConstant::ALIAS_FACEBOOK);
         if (!isset($settings['id']) || !isset($settings['secret'])) {
-            throw new InvalidProviderConfigException('Invalid settings for Facebook OAuth provider.');
+            throw new InvalidProviderConfigException($this->translator->__('Invalid settings for Facebook OAuth provider.'));
         }
 
         $this->provider = new Facebook([
             'clientId' => $settings['id'],
             'clientSecret' => $settings['secret'],
             'redirectUri' => $redirectUri,
-            'graphApiVersion' => 'v2.9',
+            'graphApiVersion' => 'v2.9'
         ]);
     }
 }

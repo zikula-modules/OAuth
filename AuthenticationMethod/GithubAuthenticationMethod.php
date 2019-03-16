@@ -29,12 +29,12 @@ class GithubAuthenticationMethod extends AbstractAuthenticationMethod
 
     public function getDisplayName()
     {
-        return 'Github';
+        return $this->translator->__('Github');
     }
 
     public function getDescription()
     {
-        return 'Login using Github via OAuth.';
+        return $this->translator->__('Login using Github via OAuth.');
     }
 
     public function getUname()
@@ -77,13 +77,13 @@ class GithubAuthenticationMethod extends AbstractAuthenticationMethod
     {
         $settings = $this->variableApi->get('ZikulaOAuthModule', OAuthConstant::ALIAS_GITHUB);
         if (!isset($settings['id']) || !isset($settings['secret'])) {
-            throw new InvalidProviderConfigException('Invalid settings for Github OAuth provider.');
+            throw new InvalidProviderConfigException($this->translator->__('Invalid settings for Github OAuth provider.'));
         }
 
         $this->provider = new Github([
             'clientId' => $settings['id'],
             'clientSecret' => $settings['secret'],
-            'redirectUri' => $redirectUri,
+            'redirectUri' => $redirectUri
         ]);
     }
 }

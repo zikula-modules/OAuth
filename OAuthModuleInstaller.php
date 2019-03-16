@@ -12,6 +12,7 @@
 namespace Zikula\OAuthModule;
 
 use Zikula\Core\AbstractExtensionInstaller;
+use Zikula\OAuthModule\Entity\MappingEntity;
 
 class OAuthModuleInstaller extends AbstractExtensionInstaller
 {
@@ -19,7 +20,7 @@ class OAuthModuleInstaller extends AbstractExtensionInstaller
      * @var array
      */
     private $entities = [
-        'Zikula\OAuthModule\Entity\MappingEntity'
+        MappingEntity::class
     ];
 
     public function install()

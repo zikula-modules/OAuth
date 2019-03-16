@@ -12,22 +12,43 @@
 namespace Zikula\OAuthModule\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Zikula\Common\Translator\TranslatorInterface;
+use Zikula\Common\Translator\TranslatorTrait;
 
 class SettingsType extends AbstractType
 {
+    use TranslatorTrait;
+
+    /**
+     * @param TranslatorInterface $translator
+     */
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->setTranslator($translator);
+    }
+
+    /**
+     * @param TranslatorInterface $translator
+     */
+    public function setTranslator(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('id', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
-                'label' => $options['translator']->__('Client id'),
+            ->add('id', TextType::class, [
+                'label' => $this->__('Client id'),
             ])
-            ->add('secret', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
-                'label' => $options['translator']->__('Client secret'),
+            ->add('secret', TextType::class, [
+                'label' => $this->__('Client secret'),
             ])
-            ->add('save', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', [
-                'label' => $options['translator']->__('Save'),
+            ->add('save', SubmitType::class, [
+                'label' => $this->__('Save'),
                 'icon' => 'fa-check',
                 'attr' => ['class' => 'btn btn-success'],
             ])
@@ -37,15 +58,5 @@ class SettingsType extends AbstractType
     public function getBlockPrefix()
     {
         return 'zikulaoauthmodule_settings';
-    }
-
-    /**
-     * @param OptionsResolver $resolver
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults([
-            'translator' => null
-        ]);
     }
 }

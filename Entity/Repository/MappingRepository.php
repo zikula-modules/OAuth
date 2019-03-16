@@ -11,20 +11,22 @@
 
 namespace Zikula\OAuthModule\Entity\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Zikula\OAuthModule\Entity\MappingEntity;
 
-class MappingRepository extends EntityRepository
+class MappingRepository extends ServiceEntityRepository
 {
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, MappingEntity::class);
+    }
+
     public function getZikulaId($method, $methodId)
     {
         $mapping = parent::findOneBy(['method' => $method, 'methodId' => $methodId]);
 
-        if (isset($mapping)) {
-            return $mapping->getZikulaId();
-        } else {
-            return null;
-        }
+        return isset($mapping) ? $mapping->getZikulaId() : null;
     }
 
     public function persistAndFlush(MappingEntity $entity)

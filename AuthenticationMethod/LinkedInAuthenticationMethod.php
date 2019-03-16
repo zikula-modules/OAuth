@@ -24,12 +24,12 @@ class LinkedInAuthenticationMethod extends AbstractAuthenticationMethod
 
     public function getDisplayName()
     {
-        return 'LinkedIn';
+        return $this->translator->__('LinkedIn');
     }
 
     public function getDescription()
     {
-        return 'Login using LinkedIn via OAuth.';
+        return $this->translator->__('Login using LinkedIn via OAuth.');
     }
 
     public function getUname()
@@ -46,13 +46,13 @@ class LinkedInAuthenticationMethod extends AbstractAuthenticationMethod
     {
         $settings = $this->variableApi->get('ZikulaOAuthModule', OAuthConstant::ALIAS_LINKEDIN);
         if (!isset($settings['id']) || !isset($settings['secret'])) {
-            throw new InvalidProviderConfigException('Invalid settings for LinkedIn OAuth provider.');
+            throw new InvalidProviderConfigException($this->translator->__('Invalid settings for LinkedIn OAuth provider.'));
         }
 
         $this->provider = new LinkedIn([
             'clientId' => $settings['id'],
             'clientSecret' => $settings['secret'],
-            'redirectUri' => $redirectUri,
+            'redirectUri' => $redirectUri
         ]);
     }
 }
