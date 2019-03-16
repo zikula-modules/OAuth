@@ -19,7 +19,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Zikula\Common\Translator\TranslatorInterface;
-use Zikula\Bundle\CoreBundle\HttpKernel\ZikulaKernel;
 use Zikula\ExtensionsModule\Api\VariableApi;
 use Zikula\OAuthModule\Entity\MappingEntity;
 use Zikula\OAuthModule\Entity\Repository\MappingRepository;
@@ -146,7 +145,7 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
             header('Location: ' . $authUrl);
             exit;
 
-            // Check given state against previously stored one to mitigate CSRF attack
+        // Check given state against previously stored one to mitigate CSRF attack
         } elseif (empty($state) || ($state !== $this->session->get('oauth2state'))) {
             $this->session->remove('oauth2state');
             $this->session->getFlashBag()->add('error', 'Invalid State');
