@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 /*
  * This file is part of the Zikula package.
  *
@@ -12,9 +13,11 @@ declare(strict_types=1);
 
 namespace Zikula\OAuthModule\AuthenticationMethod;
 
+use Exception;
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 use League\OAuth2\Client\Token\AccessToken;
+use LogicException;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -72,15 +75,6 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
      */
     protected $provider;
 
-    /**
-     * AbstractAuthenticationMethod constructor.
-     *
-     * @param TranslatorInterface $translator
-     * @param RequestStack $requestStack
-     * @param RouterInterface $router
-     * @param MappingRepository $repository
-     * @param VariableApi $variableApi
-     */
     public function __construct(
         TranslatorInterface $translator,
         RequestStack $requestStack,
@@ -96,23 +90,14 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
         $this->variableApi = $variableApi;
     }
 
-    /**
-     * @param string $redirectUri
-     */
-    abstract protected function setProvider($redirectUri);
+    abstract protected function setProvider(string $redirectUri): void;
 
-    /**
-     * @return AbstractProvider
-     */
-    public function getProvider()
+    public function getProvider(): AbstractProvider
     {
         return $this->provider;
     }
 
-    /**
-     * @return array
-     */
-    protected function getAuthorizationUrlOptions()
+    protected function getAuthorizationUrlOptions(): array
     {
         return [];
     }
@@ -121,22 +106,17 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
      * Method called during `authenticate` method after token is set.
      * Allows author to take actions which require the token.
      */
-    protected function setAdditionalUserData()
+    protected function setAdditionalUserData(): void
     {
     }
 
-    /**
-     * Authenticate the user to the provider.
-     * @param array $data
-     * @return integer|null if Zikula Uid is set for provider ID, this is returned, else null
-     */
-    public function authenticate(array $data = [])
+    public function authenticate(array $data = []): ?int
     {
         $redirectUri = $data['redirectUri'] ?? $this->router->generate('zikulausersmodule_access_login', [], UrlGeneratorInterface::ABSOLUTE_URL);
         $this->setProvider($redirectUri);
         $request = $this->requestStack->getCurrentRequest();
-        $state = $request->query->get('state', null);
-        $code = $request->query->get('code', null);
+        $state = null !== $request ? $request->query->get('state') : null;
+        $code = null !== $request ? $request->query->get('code') : null;
 
         if (!isset($code)) {
             // If no authorization code then get one
@@ -145,18 +125,20 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
 
             header('Location: ' . $authUrl);
             exit;
+        }
 
         // Check given state against previously stored one to mitigate CSRF attack
-        } elseif (empty($state) || ($state !== $this->session->get('oauth2state'))) {
+        if (empty($state) || $state !== $this->session->get('oauth2state')) {
             $this->session->remove('oauth2state');
             $this->session->getFlashBag()->add('error', 'Invalid State');
 
             return null;
         }
+
         // Try to get an access token (using the authorization code grant)
         $this->token = $this->getProvider()->getAccessToken('authorization_code', [
-                'code' => $code
-            ]);
+            'code' => $code
+        ]);
 
         try {
             // get the user's details
@@ -169,34 +151,31 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
                 $registrationUrl = $this->router->generate('zikulausersmodule_registration_register');
                 $this->session->remove('oauth2state');
                 $registerLink = '<a href="' . $registrationUrl . '">' . $this->translator->__('create a new account') . '</a>';
-                $this->session->getFlashBag()->add('error',
-                        $this->translator->__f(
-                            'This user is not locally registered. You must first %registerLink on this site before logging in with %displayName', [
-                                '%registerLink' => $registerLink,
-                                '%displayName' => $this->getDisplayName()
-                            ]
-                        )
-                    );
+                $errorMessage = $this->translator->__f('This user is not locally registered. You must first %registerLink on this site before logging in with %displayName', [
+                    '%registerLink' => $registerLink,
+                    '%displayName' => $this->getDisplayName()
+                ]);
+                $this->session->getFlashBag()->add('error', $errorMessage);
             }
 
             return $uid;
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $this->session->getFlashBag()->add('error', $this->translator->__('Could not obtain user details from external service.') . ' (' . $exception->getMessage() . ')');
 
             return null;
         }
     }
 
-    public function getId()
+    public function getId(): string
     {
         if (!$this->user) {
-            throw new \LogicException($this->translator->__('User must authenticate first.'));
+            throw new LogicException($this->translator->__('User must authenticate first.'));
         }
 
         return $this->user->getId();
     }
 
-    public function register(array $data)
+    public function register(array $data = []): bool
     {
         $mapping = new MappingEntity();
         $mapping->setMethod($this->getAlias());

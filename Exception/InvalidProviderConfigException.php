@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 /*
  * This file is part of the Zikula package.
  *
@@ -12,6 +13,8 @@ declare(strict_types=1);
 
 namespace Zikula\OAuthModule\Exception;
 
-class InvalidProviderConfigException extends \Exception
+use Exception;
+
+class InvalidProviderConfigException extends Exception
 {
 }

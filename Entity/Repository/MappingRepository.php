@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 /*
  * This file is part of the Zikula package.
  *
@@ -23,22 +24,22 @@ class MappingRepository extends ServiceEntityRepository
         parent::__construct($registry, MappingEntity::class);
     }
 
-    public function getZikulaId($method, $methodId)
+    public function getZikulaId(string $method, string $methodId): ?int
     {
-        $mapping = parent::findOneBy(['method' => $method, 'methodId' => $methodId]);
+        $mapping = $this->findOneBy(['method' => $method, 'methodId' => $methodId]);
 
         return isset($mapping) ? $mapping->getZikulaId() : null;
     }
 
-    public function persistAndFlush(MappingEntity $entity)
+    public function persistAndFlush(MappingEntity $entity): void
     {
         $this->_em->persist($entity);
         $this->_em->flush($entity);
     }
 
-    public function removeByZikulaId($uid)
+    public function removeByZikulaId(int $uid): void
     {
-        $mapping = parent::findOneBy(['zikulaId' => $uid]);
+        $mapping = $this->findOneBy(['zikulaId' => $uid]);
         if (isset($mapping)) {
             $this->_em->remove($mapping);
             $this->_em->flush();

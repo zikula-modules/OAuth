@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 /*
  * This file is part of the Zikula package.
  *
@@ -25,16 +26,12 @@ class UserDeleteListener implements EventSubscriberInterface
      */
     private $mappingRepository;
 
-    /**
-     * UserDeleteListener constructor.
-     * @param $mappingRepository
-     */
     public function __construct(MappingRepository $mappingRepository)
     {
         $this->mappingRepository = $mappingRepository;
     }
 
-    public function deleteUsers(GenericEvent $event)
+    public function deleteUsers(GenericEvent $event): void
     {
         $deletedUid = $event->getSubject();
         $this->mappingRepository->removeByZikulaId($deletedUid);

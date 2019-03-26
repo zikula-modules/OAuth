@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 /*
  * This file is part of the Zikula package.
  *
@@ -29,9 +30,9 @@ class MappingController extends AbstractController
      * @Template("ZikulaOAuthModule:Mapping:list.html.twig")
      * @Theme("admin")
      *
-     * @param MappingRepository $mappingRepository
+     * @throws AccessDeniedException
      */
-    public function listAction(MappingRepository $mappingRepository)
+    public function listAction(MappingRepository $mappingRepository): array
     {
         if (!$this->hasPermission('ZikulaOAuthModule', '::', ACCESS_ADMIN)) {
             throw new AccessDeniedException();

@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 /*
  * This file is part of the Zikula package.
  *
@@ -17,20 +18,20 @@ class OAuthConstant
     /**
      * The alias of the github authentication method.
      */
-    const ALIAS_GITHUB = 'github';
+    public const ALIAS_GITHUB = 'github';
 
     /**
      * The alias of the google authentication method.
      */
-    const ALIAS_GOOGLE = 'google';
+    public const ALIAS_GOOGLE = 'google';
 
     /**
      * The alias of the facebook authentication method.
      */
-    const ALIAS_FACEBOOK = 'facebook';
+    public const ALIAS_FACEBOOK = 'facebook';
 
     /**
      * The alias of the linkedIn authentication method.
      */
-    const ALIAS_LINKEDIN = 'linkedin';
+    public const ALIAS_LINKEDIN = 'linkedin';
 }

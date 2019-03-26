@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 /*
  * This file is part of the Zikula package.
  *
@@ -23,18 +24,12 @@ class SettingsType extends AbstractType
 {
     use TranslatorTrait;
 
-    /**
-     * @param TranslatorInterface $translator
-     */
     public function __construct(TranslatorInterface $translator)
     {
         $this->setTranslator($translator);
     }
 
-    /**
-     * @param TranslatorInterface $translator
-     */
-    public function setTranslator(TranslatorInterface $translator)
+    public function setTranslator(TranslatorInterface $translator): void
     {
         $this->translator = $translator;
     }
@@ -51,7 +46,7 @@ class SettingsType extends AbstractType
             ->add('save', SubmitType::class, [
                 'label' => $this->__('Save'),
                 'icon' => 'fa-check',
-                'attr' => ['class' => 'btn btn-success'],
+                'attr' => ['class' => 'btn btn-success']
             ])
         ;
     }

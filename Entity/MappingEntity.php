@@ -43,58 +43,37 @@ class MappingEntity
      */
     private $zikulaId;
 
-    /**
-     * @return integer
-     */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return $this->method;
     }
 
-    /**
-     * @param string $method
-     */
-    public function setMethod($method)
+    public function setMethod(string $method): void
     {
         $this->method = $method;
     }
 
-    /**
-     * @return string
-     */
-    public function getMethodId()
+    public function getMethodId(): string
     {
         return $this->methodId;
     }
 
-    /**
-     * @param string $methodId
-     */
-    public function setMethodId($methodId)
+    public function setMethodId(string $methodId): void
     {
         $this->methodId = $methodId;
     }
 
-    /**
-     * @return integer
-     */
-    public function getZikulaId()
+    public function getZikulaId(): int
     {
         return $this->zikulaId;
     }
 
-    /**
-     * @param integer $zikulaId
-     */
-    public function setZikulaId($zikulaId)
+    public function setZikulaId(int $zikulaId): void
     {
         $this->zikulaId = $zikulaId;
     }

@@ -12,9 +12,9 @@ declare(strict_types=1);
 
 namespace Zikula\OAuthModule\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Zikula\Core\Controller\AbstractController;
 use Zikula\OAuthModule\Form\Type\SettingsType;
@@ -31,28 +31,22 @@ class ConfigController extends AbstractController
      * @Theme("admin")
      * @Template("ZikulaOAuthModule:Config:settings.html.twig")
      *
-     * @param Request $request
-     * @param AuthenticationMethodCollector $authenticationMethodCollector
-     * @param string $method
-     *
-     * @return array
+     * @throws AccessDeniedException
      */
     public function settingsAction(
         Request $request,
         AuthenticationMethodCollector $authenticationMethodCollector,
-        $method = 'github'
-    ) {
+        string $method = 'github'
+    ): array {
         if (!$this->hasPermission('ZikulaOAuthModule', '::', ACCESS_ADMIN)) {
             throw new AccessDeniedException();
         }
 
         $form = $this->createForm(SettingsType::class, $this->getVar($method, []));
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            if ($form->get('save')->isClicked()) {
-                $this->setVar($method, $form->getData());
-                $this->addFlash('success', $this->__f('Settings for %method saved!', ['%method' => $method]));
-            }
+        if ($form->isSubmitted() && $form->isValid() && $form->get('save')->isClicked()) {
+            $this->setVar($method, $form->getData());
+            $this->addFlash('success', $this->__f('Settings for %method saved!', ['%method' => $method]));
         }
 
         return [

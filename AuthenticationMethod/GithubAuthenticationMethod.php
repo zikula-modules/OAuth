@@ -23,32 +23,32 @@ class GithubAuthenticationMethod extends AbstractAuthenticationMethod
      */
     private $email;
 
-    public function getAlias()
+    public function getAlias(): string
     {
         return OAuthConstant::ALIAS_GITHUB;
     }
 
-    public function getDisplayName()
+    public function getDisplayName(): string
     {
         return $this->translator->__('Github');
     }
 
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->translator->__('Login using Github via OAuth.');
     }
 
-    public function getUname()
+    public function getUname(): string
     {
         return $this->user->getNickname();
     }
 
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
 
-    protected function getAuthorizationUrlOptions()
+    protected function getAuthorizationUrlOptions(): array
     {
         return [
             'state' => 'OPTIONAL_CUSTOM_CONFIGURED_STATE',
@@ -56,7 +56,7 @@ class GithubAuthenticationMethod extends AbstractAuthenticationMethod
         ];
     }
 
-    protected function setAdditionalUserData()
+    protected function setAdditionalUserData(): void
     {
         // this method is needed to get the user's email because github doesn't provide it as a standard
         // part of the data that is returned as a 'user'.
@@ -74,10 +74,10 @@ class GithubAuthenticationMethod extends AbstractAuthenticationMethod
         }
     }
 
-    protected function setProvider($redirectUri)
+    protected function setProvider(string $redirectUri): void
     {
         $settings = $this->variableApi->get('ZikulaOAuthModule', OAuthConstant::ALIAS_GITHUB);
-        if (!isset($settings['id']) || !isset($settings['secret'])) {
+        if (!isset($settings['id'], $settings['secret'])) {
             throw new InvalidProviderConfigException($this->translator->__('Invalid settings for Github OAuth provider.'));
         }
 

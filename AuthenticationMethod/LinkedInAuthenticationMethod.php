@@ -18,35 +18,35 @@ use Zikula\OAuthModule\OAuthConstant;
 
 class LinkedInAuthenticationMethod extends AbstractAuthenticationMethod
 {
-    public function getAlias()
+    public function getAlias(): string
     {
         return OAuthConstant::ALIAS_LINKEDIN;
     }
 
-    public function getDisplayName()
+    public function getDisplayName(): string
     {
         return $this->translator->__('LinkedIn');
     }
 
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->translator->__('Login using LinkedIn via OAuth.');
     }
 
-    public function getUname()
+    public function getUname(): string
     {
         return $this->user->getFirstname() . ' ' . $this->user->getLastName();
     }
 
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->user->getEmail();
     }
 
-    protected function setProvider($redirectUri)
+    protected function setProvider(string $redirectUri): void
     {
         $settings = $this->variableApi->get('ZikulaOAuthModule', OAuthConstant::ALIAS_LINKEDIN);
-        if (!isset($settings['id']) || !isset($settings['secret'])) {
+        if (!isset($settings['id'], $settings['secret'])) {
             throw new InvalidProviderConfigException($this->translator->__('Invalid settings for LinkedIn OAuth provider.'));
         }
 

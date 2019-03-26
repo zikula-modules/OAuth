@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 /*
  * This file is part of the Zikula package.
  *
@@ -24,19 +25,19 @@ class OAuthModuleInstaller extends AbstractExtensionInstaller
         MappingEntity::class
     ];
 
-    public function install()
+    public function install(): bool
     {
         $this->schemaTool->create($this->entities);
 
         return true;
     }
 
-    public function upgrade($oldversion)
+    public function upgrade(string $oldVersion): bool
     {
         return true;
     }
 
-    public function uninstall()
+    public function uninstall(): bool
     {
         return true;
     }

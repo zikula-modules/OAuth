@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 /*
  * This file is part of the Zikula package.
  *
@@ -41,30 +42,19 @@ class LinkContainer implements LinkContainerInterface
      */
     private $collector;
 
-    /**
-     * constructor.
-     *
-     * @param TranslatorInterface $translator
-     * @param RouterInterface $router
-     * @param PermissionApi $permissionApi
-     * @param AuthenticationMethodCollector $collector
-     */
-    public function __construct(TranslatorInterface $translator, RouterInterface $router, PermissionApi $permissionApi, AuthenticationMethodCollector $collector)
-    {
+    public function __construct(
+        TranslatorInterface $translator,
+        RouterInterface $router,
+        PermissionApi $permissionApi,
+        AuthenticationMethodCollector $collector
+    ) {
         $this->translator = $translator;
         $this->router = $router;
         $this->permissionApi = $permissionApi;
         $this->collector = $collector;
     }
 
-    /**
-     * get Links of any type for this extension
-     * required by the interface
-     *
-     * @param string $type
-     * @return array
-     */
-    public function getLinks($type = LinkContainerInterface::TYPE_ADMIN)
+    public function getLinks(string $type = LinkContainerInterface::TYPE_ADMIN): array
     {
         $method = 'get' . ucfirst(mb_strtolower($type));
         if (method_exists($this, $method)) {
@@ -75,11 +65,9 @@ class LinkContainer implements LinkContainerInterface
     }
 
     /**
-     * get the Admin links for this extension
-     *
-     * @return array
+     * Get the admin links for this extension.
      */
-    private function getAdmin()
+    private function getAdmin(): array
     {
         $links = [];
         if ($this->permissionApi->hasPermission('ZikulaOAuthModule::', '::', ACCESS_ADMIN)) {
@@ -91,6 +79,9 @@ class LinkContainer implements LinkContainerInterface
             $methods = [OAuthConstant::ALIAS_GITHUB, OAuthConstant::ALIAS_GOOGLE, OAuthConstant::ALIAS_FACEBOOK, OAuthConstant::ALIAS_LINKEDIN];
             foreach ($methods as $method) {
                 $authMethod = $this->collector->get($method);
+                if (null === $authMethod) {
+                    continue;
+                }
                 $links[] = [
                     'url' => $this->router->generate('zikulaoauthmodule_config_settings', ['method' => $method]),
                     'text' => $authMethod->getDisplayName() . ' ' . $this->translator->__('settings'),
@@ -102,12 +93,7 @@ class LinkContainer implements LinkContainerInterface
         return $links;
     }
 
-    /**
-     * set the BundleName as required buy the interface
-     *
-     * @return string
-     */
-    public function getBundleName()
+    public function getBundleName(): string
     {
         return 'ZikulaOAuthModule';
     }
