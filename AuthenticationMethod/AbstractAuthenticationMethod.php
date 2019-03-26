@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 /*
  * This file is part of the Zikula package.
  *
@@ -131,7 +132,7 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
      */
     public function authenticate(array $data = [])
     {
-        $redirectUri = isset($data['redirectUri']) ? $data['redirectUri'] : $this->router->generate('zikulausersmodule_access_login', [], UrlGeneratorInterface::ABSOLUTE_URL);
+        $redirectUri = $data['redirectUri'] ?? $this->router->generate('zikulausersmodule_access_login', [], UrlGeneratorInterface::ABSOLUTE_URL);
         $this->setProvider($redirectUri);
         $request = $this->requestStack->getCurrentRequest();
         $state = $request->query->get('state', null);
@@ -151,24 +152,24 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
             $this->session->getFlashBag()->add('error', 'Invalid State');
 
             return null;
-        } else {
-            // Try to get an access token (using the authorization code grant)
-            $this->token = $this->getProvider()->getAccessToken('authorization_code', [
+        }
+        // Try to get an access token (using the authorization code grant)
+        $this->token = $this->getProvider()->getAccessToken('authorization_code', [
                 'code' => $code
             ]);
 
-            try {
-                // get the user's details
-                $this->user = $this->getProvider()->getResourceOwner($this->token);
-                $this->setAdditionalUserData();
-                $uid = $this->repository->getZikulaId($this->getAlias(), $this->user->getId());
-                if (isset($uid)) {
-                    //$this->session->getFlashBag()->add('success', sprintf('Hello %s!', $this->getUname()));
-                } else {
-                    $registrationUrl = $this->router->generate('zikulausersmodule_registration_register');
-                    $this->session->remove('oauth2state');
-                    $registerLink = '<a href="' . $registrationUrl . '">' . $this->translator->__('create a new account') . '</a>';
-                    $this->session->getFlashBag()->add('error',
+        try {
+            // get the user's details
+            $this->user = $this->getProvider()->getResourceOwner($this->token);
+            $this->setAdditionalUserData();
+            $uid = $this->repository->getZikulaId($this->getAlias(), $this->user->getId());
+            if (isset($uid)) {
+                //$this->session->getFlashBag()->add('success', sprintf('Hello %s!', $this->getUname()));
+            } else {
+                $registrationUrl = $this->router->generate('zikulausersmodule_registration_register');
+                $this->session->remove('oauth2state');
+                $registerLink = '<a href="' . $registrationUrl . '">' . $this->translator->__('create a new account') . '</a>';
+                $this->session->getFlashBag()->add('error',
                         $this->translator->__f(
                             'This user is not locally registered. You must first %registerLink on this site before logging in with %displayName', [
                                 '%registerLink' => $registerLink,
@@ -176,14 +177,13 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
                             ]
                         )
                     );
-                }
-
-                return $uid;
-            } catch (\Exception $exception) {
-                $this->session->getFlashBag()->add('error', $this->translator->__('Could not obtain user details from external service.') . ' (' . $exception->getMessage() . ')');
-
-                return null;
             }
+
+            return $uid;
+        } catch (\Exception $exception) {
+            $this->session->getFlashBag()->add('error', $this->translator->__('Could not obtain user details from external service.') . ' (' . $exception->getMessage() . ')');
+
+            return null;
         }
     }
 
