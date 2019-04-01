@@ -34,7 +34,7 @@ class MappingRepository extends ServiceEntityRepository
     public function persistAndFlush(MappingEntity $entity): void
     {
         $this->_em->persist($entity);
-        $this->_em->flush($entity);
+        $this->_em->flush();
     }
 
     public function removeByZikulaId(int $uid): void
