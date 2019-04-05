@@ -39,6 +39,8 @@ class OAuthModuleInstaller extends AbstractExtensionInstaller
 
     public function uninstall(): bool
     {
+        $this->schemaTool->drop($this->entities);
+
         return true;
     }
 }
