@@ -27,7 +27,7 @@ class MappingController extends AbstractController
 {
     /**
      * @Route("/list")
-     * @Template("ZikulaOAuthModule:Mapping:list.html.twig")
+     * @Template("@ZikulaOAuthModule/Mapping/list.html.twig")
      * @Theme("admin")
      *
      * @throws AccessDeniedException

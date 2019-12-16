@@ -3,12 +3,25 @@
 <h2><i class="fa fa-list"></i>{{ __('Mappings list') }}</h2>
 
 <table class="table table-bordered table-striped">
+    <colgroup>
+        <col id="cMethod" />
+        <col id="cMethodId" />
+        <col id="cZikulaId" />
+    </colgroup>
     <thead>
-    <tr><th>{{ __('Method') }}</th><th>{{ __('MethodId') }}</th><th>{{ __('ZikulaId') }}</th></tr>
+        <tr>
+            <th id="hMethod" scope="col">{{ __('Method') }}</th>
+            <th id="hMethodId" scope="col">{{ __('MethodId') }}</th>
+            <th id="hZikulaId" scope="col">{{ __('ZikulaId') }}</th>
+        </tr>
     </thead>
     <tbody>
         {% for mapping in mappings %}
-            <tr><td>{{ mapping.method }}</td><td>{{ mapping.methodId }}</td><td>{{ mapping.zikulaId }}</td></tr>
+            <tr>
+                <td headers="hMethod">{{ mapping.method }}</td>
+                <td headers="hMethodId">{{ mapping.methodId }}</td>
+                <td headers="hZikulaId">{{ mapping.zikulaId }}</td>
+            </tr>
         {% endfor %}
     </tbody>
 </table>

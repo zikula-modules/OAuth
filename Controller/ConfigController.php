@@ -28,8 +28,8 @@ class ConfigController extends AbstractController
 {
     /**
      * @Route("/settings/{method}")
+     * @Template("@ZikulaOAuthModule/Config/settings.html.twig")
      * @Theme("admin")
-     * @Template("ZikulaOAuthModule:Config:settings.html.twig")
      *
      * @throws AccessDeniedException
      */
