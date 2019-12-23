@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Zikula\Common\Translator\TranslatorInterface;
-use Zikula\ExtensionsModule\Api\VariableApi;
+use Zikula\ExtensionsModule\Api\ApiInterface\VariableApiInterface;
 use Zikula\OAuthModule\Entity\MappingEntity;
 use Zikula\OAuthModule\Entity\Repository\MappingRepository;
 use Zikula\UsersModule\AuthenticationMethodInterface\ReEntrantAuthenticationMethodInterface;
@@ -61,7 +61,7 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
     protected $repository;
 
     /**
-     * @var VariableApi
+     * @var VariableApiInterface
      */
     protected $variableApi;
 
@@ -80,7 +80,7 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
         RequestStack $requestStack,
         RouterInterface $router,
         MappingRepository $repository,
-        VariableApi $variableApi
+        VariableApiInterface $variableApi
     ) {
         $this->translator = $translator;
         $request = $requestStack->getCurrentRequest();
@@ -148,21 +148,17 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
             $this->user = $this->getProvider()->getResourceOwner($this->token);
             $this->setAdditionalUserData();
             $uid = $this->repository->getZikulaId($this->getAlias(), $this->user->getId());
-            if (isset($uid)) {
-                /*if (null !== $this->session) {
-                    $this->session->getFlashBag()->add('success', sprintf('Hello %s!', $this->getUname()));
-                }*/
-            } else {
-                $registrationUrl = $this->router->generate('zikulausersmodule_registration_register');
-                if (null !== $this->session) {
+            if (null !== $this->session) {
+                if (isset($uid)) {
+                    //$this->session->getFlashBag()->add('success', sprintf('Hello %s!', $this->getUname()));
+                } else {
+                    $registrationUrl = $this->router->generate('zikulausersmodule_registration_register');
                     $this->session->remove('oauth2state');
-                }
-                $registerLink = '<a href="' . $registrationUrl . '">' . $this->translator->__('create a new account') . '</a>';
-                $errorMessage = $this->translator->__f('This user is not locally registered. You must first %registerLink on this site before logging in with %displayName', [
-                    '%registerLink' => $registerLink,
-                    '%displayName' => $this->getDisplayName()
-                ]);
-                if (null !== $this->session) {
+                    $registerLink = '<a href="' . $registrationUrl . '">' . $this->translator->__('create a new account') . '</a>';
+                    $errorMessage = $this->translator->__f('This user is not locally registered. You must first %registerLink on this site before logging in with %displayName', [
+                        '%registerLink' => $registerLink,
+                        '%displayName' => $this->getDisplayName()
+                    ]);
                     $this->session->getFlashBag()->add('error', $errorMessage);
                 }
             }
