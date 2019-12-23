@@ -19,7 +19,7 @@ use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 use League\OAuth2\Client\Token\AccessToken;
 use LogicException;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Zikula\Common\Translator\TranslatorInterface;
@@ -36,7 +36,7 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
     protected $translator;
 
     /**
-     * @var Session
+     * @var SessionInterface
      */
     protected $session;
 
@@ -83,7 +83,8 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
         VariableApi $variableApi
     ) {
         $this->translator = $translator;
-        $this->session = $requestStack->getCurrentRequest()->getSession();
+        $request = $requestStack->getCurrentRequest();
+        $this->session = $request->hasSession() ? $request->getSession() : null;
         $this->requestStack = $requestStack;
         $this->router = $router;
         $this->repository = $repository;
@@ -121,14 +122,16 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
         if (!isset($code)) {
             // If no authorization code then get one
             $authUrl = $this->getProvider()->getAuthorizationUrl($this->getAuthorizationUrlOptions());
-            $this->session->set('oauth2state', $this->getProvider()->getState());
+            if (null !== $this->session) {
+                $this->session->set('oauth2state', $this->getProvider()->getState());
+            }
 
             header('Location: ' . $authUrl);
             exit;
         }
 
         // Check given state against previously stored one to mitigate CSRF attack
-        if (empty($state) || $state !== $this->session->get('oauth2state')) {
+        if (empty($state) || (null !== $this->session && $state !== $this->session->get('oauth2state'))) {
             $this->session->remove('oauth2state');
             $this->session->getFlashBag()->add('error', 'Invalid State');
 
@@ -146,21 +149,32 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
             $this->setAdditionalUserData();
             $uid = $this->repository->getZikulaId($this->getAlias(), $this->user->getId());
             if (isset($uid)) {
-                //$this->session->getFlashBag()->add('success', sprintf('Hello %s!', $this->getUname()));
+                /*if (null !== $this->session) {
+                    $this->session->getFlashBag()->add('success', sprintf('Hello %s!', $this->getUname()));
+                }*/
             } else {
                 $registrationUrl = $this->router->generate('zikulausersmodule_registration_register');
-                $this->session->remove('oauth2state');
+                if (null !== $this->session) {
+                    $this->session->remove('oauth2state');
+                }
                 $registerLink = '<a href="' . $registrationUrl . '">' . $this->translator->__('create a new account') . '</a>';
                 $errorMessage = $this->translator->__f('This user is not locally registered. You must first %registerLink on this site before logging in with %displayName', [
                     '%registerLink' => $registerLink,
                     '%displayName' => $this->getDisplayName()
                 ]);
-                $this->session->getFlashBag()->add('error', $errorMessage);
+                if (null !== $this->session) {
+                    $this->session->getFlashBag()->add('error', $errorMessage);
+                }
             }
 
             return $uid;
         } catch (Exception $exception) {
-            $this->session->getFlashBag()->add('error', $this->translator->__('Could not obtain user details from external service.') . ' (' . $exception->getMessage() . ')');
+            if (null !== $this->session) {
+                $this->session->getFlashBag()->add(
+                    'error',
+                    $this->translator->__('Could not obtain user details from external service.') . ' (' . $exception->getMessage() . ')'
+                );
+            }
 
             return null;
         }
