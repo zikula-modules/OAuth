@@ -1,16 +1,28 @@
 {% form_theme form with [
-    '@ZikulaFormExtension/Form/bootstrap_3_zikula_admin_layout.html.twig',
+    '@ZikulaFormExtension/Form/bootstrap_4_zikula_admin_layout.html.twig',
     '@ZikulaFormExtension/Form/form_div_layout.html.twig'
 ] %}
-{{ polyfill() }}
 {{ adminHeader() }}
 
-<h2><i class="fa fa-wrench"></i> {{ method.DisplayName }} {{ __('Settings') }}</h2>
-<div>{{ include('@ZikulaOAuthModule/Config/' ~ method.alias ~ '.html.twig') }}</div>
-<div class="well">
-    {{ form_start(form) }}
-    {{ form_errors(form) }}
-    {{ form_end(form) }}
+<div class="container-fluid">
+    <div class="row">
+        <h3>
+            <span class="fa fa-wrench"></span>
+            {{ method.DisplayName }} {{ __('Settings') }}
+            {{ pageSetVar('title', method.DisplayName ~ ' ' ~ __('Settings')) }}
+        </h3>
+
+        <div>{{ include('@ZikulaOAuthModule/Config/' ~ method.alias ~ '.html.twig') }}</div>
+
+        <div class="card bg-light m-3">
+            <div class="card-header">{{ method.DisplayName }} {{ __('Settings') }}</div>
+            <div class="card-body">
+                {{ form_start(form) }}
+                {{ form_errors(form) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
 </div>
 
 {{ adminFooter() }}
