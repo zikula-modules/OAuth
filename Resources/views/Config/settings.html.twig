@@ -3,26 +3,20 @@
     '@ZikulaFormExtension/Form/form_div_layout.html.twig'
 ] %}
 {{ adminHeader() }}
+<h3>
+    <span class="fa fa-wrench"></span>
+    {{ method.DisplayName }} {{ __('Settings') }}
+    {{ pageSetVar('title', method.DisplayName ~ ' ' ~ __('Settings')) }}
+</h3>
 
-<div class="container-fluid">
-    <div class="row">
-        <h3>
-            <span class="fa fa-wrench"></span>
-            {{ method.DisplayName }} {{ __('Settings') }}
-            {{ pageSetVar('title', method.DisplayName ~ ' ' ~ __('Settings')) }}
-        </h3>
+<div>{{ include('@ZikulaOAuthModule/Config/' ~ method.alias ~ '.html.twig') }}</div>
 
-        <div>{{ include('@ZikulaOAuthModule/Config/' ~ method.alias ~ '.html.twig') }}</div>
-
-        <div class="card bg-light m-3">
-            <div class="card-header">{{ method.DisplayName }} {{ __('Settings') }}</div>
-            <div class="card-body">
-                {{ form_start(form) }}
-                {{ form_errors(form) }}
-                {{ form_end(form) }}
-            </div>
-        </div>
+<div class="card bg-light m-3">
+    <div class="card-header">{{ method.DisplayName }} {{ __('Settings') }}</div>
+    <div class="card-body">
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+        {{ form_end(form) }}
     </div>
 </div>
-
 {{ adminFooter() }}
