@@ -1,24 +1,24 @@
 <div class="alert alert-info">
-    <p>{{ __('Application setup at') }}: <a href="https://developers.facebook.com/apps/">https://developers.facebook.com/apps/</a></p>
+    <p>{% trans %}Application setup at{% endtrans %}: <a href="https://developers.facebook.com/apps/">https://developers.facebook.com/apps/</a></p>
 
     <ul>
-        <li>{{ __('Click "+ Add a New App" button') }}</li>
-        <li>{{ __('Choose a display name and enter your email. Click "Create App ID" and complete the Captcha.') }}</li>
-        <li>{{ __('Next to "Facebook Login" click "Get Started" button.') }}</li>
-        <li>{{ __('Do not do "QuickStart" - click the Settings link under Facebook Login in the menu on the left side.') }}</li>
+        <li>{% trans %}Click "+ Add a New App" button{% endtrans %}</li>
+        <li>{% trans %}Choose a display name and enter your email. Click "Create App ID" and complete the Captcha.{% endtrans %}</li>
+        <li>{% trans %}Next to "Facebook Login" click "Get Started" button.{% endtrans %}</li>
+        <li>{% trans %}Do not do "QuickStart" - click the Settings link under Facebook Login in the menu on the left side.{% endtrans %}</li>
     </ul>
 
-    {{ __('Add two') }} <code>Valid OAuth redirect URIs</code>:
+    {% trans %}Add two{% endtrans %} <code>Valid OAuth redirect URIs</code>:
     <ul>
         <li>{{ url('zikulausersmodule_access_login') }}</li>
         <li>{{ url('zikulausersmodule_registration_register') }}</li>
     </ul>
 
-    {{ __('Complete:') }}:
+    {% trans %}Complete:{% endtrans %}:
     <ul>
-        <li>{{ __('Click Save button.') }}</li>
-        <li>{{ __('Click App Review in side menu.') }}</li>
-        <li>{{ __('Enable "Make Public".') }}</li>
-        <li>{{ __('Obtain the App ID and Secret from the Dashboard.') }}</li>
+        <li>{% trans %}Click Save button.{% endtrans %}</li>
+        <li>{% trans %}Click App Review in side menu.{% endtrans %}</li>
+        <li>{% trans %}Enable "Make Public".{% endtrans %}</li>
+        <li>{% trans %}Obtain the App ID and Secret from the Dashboard.{% endtrans %}</li>
     </ul>
 </div>

@@ -1,16 +1,16 @@
 <div class="alert alert-info">
-    <p>{{ __('Application setup at') }}: <a href="https://console.developers.google.com/">https://console.developers.google.com/</a></p>
+    <p>{% trans %}Application setup at{% endtrans %}: <a href="https://console.developers.google.com/">https://console.developers.google.com/</a></p>
 
-    {{ __('Add one') }} <code>Authorized JavaScript origins</code>:
+    {% trans %}Add one{% endtrans %} <code>Authorized JavaScript origins</code>:
     <ul>
         <li>{{ app.request.schemeAndHttpHost }}</li>
     </ul>
 
-    {{ __('Add two') }} <code>Authorized redirect URIs</code>:
+    {% trans %}Add two{% endtrans %} <code>Authorized redirect URIs</code>:
     <ul>
         <li>{{ url('zikulausersmodule_access_login') }}</li>
         <li>{{ url('zikulausersmodule_registration_register') }}</li>
     </ul>
 
-    <strong>{{ __('You must also enable the Google+ Api') }}</strong>
+    <strong>{% trans %}You must also enable the Google+ Api{% endtrans %}</strong>
 </div>

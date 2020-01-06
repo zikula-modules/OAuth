@@ -1,8 +1,8 @@
 <div class="alert alert-info">
-    <p>{{ __('Application setup at') }}: <a href="https://www.linkedin.com/secure/developer?newapp=">https://www.linkedin.com/secure/developer?newapp=</a></p>
+    <p>{% trans %}Application setup at{% endtrans %}: <a href="https://www.linkedin.com/secure/developer?newapp=">https://www.linkedin.com/secure/developer?newapp=</a></p>
 
-    <p>{{ __('Check the box under "Default Application Permissions" for `r_basicprofile` and `r_emailaddress`') }}</p>
-    {{ __('Add two') }} <code>Authorized redirect URLs</code>:
+    <p>{% trans %}Check the box under "Default Application Permissions" for `r_basicprofile` and `r_emailaddress`{% endtrans %}</p>
+    {% trans %}Add two{% endtrans %} <code>Authorized redirect URLs</code>:
     <ul>
         <li>{{ url('zikulausersmodule_access_login') }}</li>
         <li>{{ url('zikulausersmodule_registration_register') }}</li>

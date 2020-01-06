@@ -1,6 +1,6 @@
 {{ adminHeader() }}
 <h3>
-    <i class="fa fa-list"></i>{{ __('Mappings list') }}
+    <i class="fa fa-list"></i>{% trans %}Mappings list{% endtrans %}
 </h3>
 <table class="table table-bordered table-striped">
     <colgroup>
@@ -10,9 +10,9 @@
     </colgroup>
     <thead>
         <tr>
-            <th id="hMethod" scope="col">{{ __('Method') }}</th>
-            <th id="hMethodId" scope="col">{{ __('MethodId') }}</th>
-            <th id="hZikulaId" scope="col">{{ __('ZikulaId') }}</th>
+            <th id="hMethod" scope="col">{% trans %}Method{% endtrans %}</th>
+            <th id="hMethodId" scope="col">{% trans %}MethodId{% endtrans %}</th>
+            <th id="hZikulaId" scope="col">{% trans %}ZikulaId{% endtrans %}</th>
         </tr>
     </thead>
     <tbody>

@@ -1,12 +1,12 @@
 <div class="alert alert-info">
-    <p>{{ __('Application setup at') }}: <a href="https://github.com/settings/applications/new">https://github.com/settings/applications/new</a></p>
+    <p>{% trans %}Application setup at{% endtrans %}: <a href="https://github.com/settings/applications/new">https://github.com/settings/applications/new</a></p>
 
-    {{ __('Set the') }} <code>Homepage URL</code> to:
+    {% trans %}Set the{% endtrans %} <code>Homepage URL</code> to:
     <ul>
         <li>{{ url('home') }}</li>
     </ul>
 
-    {{ __('Set the') }} <code>Authorization callback URL</code> to:
+    {% trans %}Set the{% endtrans %} <code>Authorization callback URL</code> to:
     <ul>
         <li>{{ url('home') }}</li>
     </ul>
