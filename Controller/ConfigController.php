@@ -46,7 +46,7 @@ class ConfigController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid() && $form->get('save')->isClicked()) {
             $this->setVar($method, $form->getData());
-            $this->addFlash('success', $this->__f('Settings for %method saved!', ['%method' => $method]));
+            $this->addFlash('success', $this->trans('Settings for %method saved!', ['%method' => $method]));
         }
 
         return [

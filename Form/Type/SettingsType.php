@@ -38,13 +38,13 @@ class SettingsType extends AbstractType
     {
         $builder
             ->add('id', TextType::class, [
-                'label' => $this->__('Client id'),
+                'label' => $this->trans('Client id'),
             ])
             ->add('secret', TextType::class, [
-                'label' => $this->__('Client secret'),
+                'label' => $this->trans('Client secret'),
             ])
             ->add('save', SubmitType::class, [
-                'label' => $this->__('Save'),
+                'label' => $this->trans('Save'),
                 'icon' => 'fa-check',
                 'attr' => ['class' => 'btn btn-success']
             ])
