@@ -73,7 +73,7 @@ class LinkContainer implements LinkContainerInterface
         if ($this->permissionApi->hasPermission('ZikulaOAuthModule::', '::', ACCESS_ADMIN)) {
             $links[] = [
                 'url' => $this->router->generate('zikulaoauthmodule_mapping_list'),
-                'text' => $this->translator->__('Mapping list'),
+                'text' => $this->translator->trans('Mapping list'),
                 'icon' => 'list'
             ];
             $methods = [OAuthConstant::ALIAS_GITHUB, OAuthConstant::ALIAS_GOOGLE, OAuthConstant::ALIAS_FACEBOOK, OAuthConstant::ALIAS_LINKEDIN];
@@ -84,7 +84,7 @@ class LinkContainer implements LinkContainerInterface
                 }
                 $links[] = [
                     'url' => $this->router->generate('zikulaoauthmodule_config_settings', ['method' => $method]),
-                    'text' => $authMethod->getDisplayName() . ' ' . $this->translator->__('settings'),
+                    'text' => $authMethod->getDisplayName() . ' ' . $this->translator->trans('settings'),
                     'icon' => 'wrench'
                 ];
             }

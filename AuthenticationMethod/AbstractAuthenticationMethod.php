@@ -154,8 +154,8 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
                 } else {
                     $registrationUrl = $this->router->generate('zikulausersmodule_registration_register');
                     $this->session->remove('oauth2state');
-                    $registerLink = '<a href="' . $registrationUrl . '">' . $this->translator->__('create a new account') . '</a>';
-                    $errorMessage = $this->translator->__f('This user is not locally registered. You must first %registerLink on this site before logging in with %displayName', [
+                    $registerLink = '<a href="' . $registrationUrl . '">' . $this->translator->trans('create a new account') . '</a>';
+                    $errorMessage = $this->translator->trans('This user is not locally registered. You must first %registerLink on this site before logging in with %displayName', [
                         '%registerLink' => $registerLink,
                         '%displayName' => $this->getDisplayName()
                     ]);
@@ -168,7 +168,7 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
             if (null !== $this->session) {
                 $this->session->getFlashBag()->add(
                     'error',
-                    $this->translator->__('Could not obtain user details from external service.') . ' (' . $exception->getMessage() . ')'
+                    $this->translator->trans('Could not obtain user details from external service.') . ' (' . $exception->getMessage() . ')'
                 );
             }
 
@@ -179,7 +179,7 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
     public function getId(): string
     {
         if (!$this->user) {
-            throw new LogicException($this->translator->__('User must authenticate first.'));
+            throw new LogicException($this->translator->trans('User must authenticate first.'));
         }
 
         return $this->user->getId();

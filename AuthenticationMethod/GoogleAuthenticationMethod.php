@@ -25,12 +25,12 @@ class GoogleAuthenticationMethod extends AbstractAuthenticationMethod
 
     public function getDisplayName(): string
     {
-        return $this->translator->__('Google');
+        return $this->translator->trans('Google');
     }
 
     public function getDescription(): string
     {
-        return $this->translator->__('Login using Google via OAuth.');
+        return $this->translator->trans('Login using Google via OAuth.');
     }
 
     public function getUname(): string
@@ -47,7 +47,7 @@ class GoogleAuthenticationMethod extends AbstractAuthenticationMethod
     {
         $settings = $this->variableApi->get('ZikulaOAuthModule', OAuthConstant::ALIAS_GOOGLE);
         if (!isset($settings['id'], $settings['secret'])) {
-            throw new InvalidProviderConfigException($this->translator->__('Invalid settings for Google OAuth provider.'));
+            throw new InvalidProviderConfigException($this->translator->trans('Invalid settings for Google OAuth provider.'));
         }
 
         $this->provider = new Google([
