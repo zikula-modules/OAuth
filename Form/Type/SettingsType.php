@@ -17,29 +17,20 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
-use Zikula\Common\Translator\TranslatorTrait;
 
 class SettingsType extends AbstractType
 {
-    use TranslatorTrait;
-
-    public function __construct(TranslatorInterface $translator)
-    {
-        $this->setTranslator($translator);
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('id', TextType::class, [
-                'label' => $this->trans('Client id'),
+                'label' => 'Client id'
             ])
             ->add('secret', TextType::class, [
-                'label' => $this->trans('Client secret'),
+                'label' => 'Client secret'
             ])
             ->add('save', SubmitType::class, [
-                'label' => $this->trans('Save'),
+                'label' => 'Save',
                 'icon' => 'fa-check',
                 'attr' => ['class' => 'btn btn-success']
             ])
