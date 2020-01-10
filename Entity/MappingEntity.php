@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace Zikula\OAuthModule\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class MappingEntity
@@ -30,11 +31,13 @@ class MappingEntity
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\Length(min="0", max="255", allowEmptyString="false")
      */
     private $method;
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\Length(min="0", max="255", allowEmptyString="false")
      */
     private $methodId;
 
