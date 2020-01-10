@@ -1,5 +1,4 @@
-OAuth
-=====
+## OAuth
 
 OAuth Authentication for Zikula 1.4.3+
 
@@ -15,8 +14,7 @@ Providers
  - Google
  - LinkedIn
 
-Setting up the providers
-========================
+## Setting up the providers
 
 Each provider (or authentication method) requires you to set up an 'application' for each website that employs this module.
 Typically you create the application at their website and are provided with a `clientId` and a `clientSecret`.
