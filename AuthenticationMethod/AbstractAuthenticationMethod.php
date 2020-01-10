@@ -84,7 +84,7 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
     ) {
         $this->translator = $translator;
         $request = $requestStack->getCurrentRequest();
-        $this->session = $request->hasSession() ? $request->getSession() : null;
+        $this->session = null !== $request && $request->hasSession() ? $request->getSession() : null;
         $this->requestStack = $requestStack;
         $this->router = $router;
         $this->repository = $repository;
