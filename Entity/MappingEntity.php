@@ -26,23 +26,27 @@ class MappingEntity
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
     private $id;
 
     /**
      * @ORM\Column(type="string")
      * @Assert\Length(min="0", max="255", allowEmptyString="false")
+     * @var string
      */
     private $method;
 
     /**
      * @ORM\Column(type="string")
      * @Assert\Length(min="0", max="255", allowEmptyString="false")
+     * @var string
      */
     private $methodId;
 
     /**
      * @ORM\Column(type="integer")
+     * @var int
      */
     private $zikulaId;
 
