@@ -27,7 +27,10 @@
             "class": "Zikula\\OAuthModule\\ZikulaOAuthModule",
             "displayname": "OAuthModule",
             "capabilities": {
-                "admin": {"route": "zikulaoauthmodule_config_settings"}
+                "admin": {
+                    "route": "zikulaoauthmodule_config_settings",
+                    "icon": "fas fa-network-wired"
+                }
             },
             "url": "oauth",
             "oldnames": [],
