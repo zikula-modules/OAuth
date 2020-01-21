@@ -1,0 +1,44 @@
+'Application setup at': null
+'Click "+ Add a New App" button': null
+'Choose a display name and enter your email. Click "Create App ID" and complete the Captcha.': null
+'Next to "Facebook Login" click "Get Started" button.': null
+'Do not do "QuickStart" - click the Settings link under Facebook Login in the menu on the left side.': null
+'Add two': null
+'Complete:': null
+'Click Save button.': null
+'Click App Review in side menu.': null
+'Enable "Make Public".': null
+'Obtain the App ID and Secret from the Dashboard.': null
+Settings: null
+'Set the': null
+'Add one': null
+'You must also enable the Google+ Api': null
+'Check the box under "Default Application Permissions" for `r_basicprofile` and `r_emailaddress`': null
+'Mappings list': null
+Method: null
+MethodId: null
+ZikulaId: null
+'No items found.': null
+'Client id': null
+'Client secret': null
+Save: null
+Google: null
+'Login using Google via OAuth.': null
+'Invalid settings for Google OAuth provider.': null
+LinkedIn: null
+'Login using LinkedIn via OAuth.': null
+'Invalid settings for LinkedIn OAuth provider.': null
+'Invalid State': null
+'create a new account': null
+'This user is not locally registered. You must first %registerLink on this site before logging in with %displayName': null
+'Could not obtain user details from external service.': null
+'User must authenticate first.': null
+Github: null
+'Login using Github via OAuth.': null
+'Invalid settings for Github OAuth provider.': null
+Facebook: null
+'Login using Facebook via OAuth.': null
+'Invalid settings for Facebook OAuth provider.': null
+'Settings for %method saved!': null
+'Mapping list': null
+'%auth_method% settings': null
