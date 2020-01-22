@@ -16,7 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Zikula\Core\Controller\AbstractController;
+use Zikula\Bundle\CoreBundle\Controller\AbstractController;
 use Zikula\OAuthModule\Form\Type\SettingsType;
 use Zikula\ThemeModule\Engine\Annotation\Theme;
 use Zikula\UsersModule\Collector\AuthenticationMethodCollector;

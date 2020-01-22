@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Zikula\OAuthModule;
 
-use Zikula\Core\AbstractExtensionInstaller;
+use Zikula\ExtensionsModule\Installer\AbstractExtensionInstaller;
 use Zikula\OAuthModule\Entity\MappingEntity;
 
 class OAuthModuleInstaller extends AbstractExtensionInstaller
