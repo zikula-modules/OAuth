@@ -3,16 +3,17 @@
     '@ZikulaFormExtension/Form/form_div_layout.html.twig'
 ] %}
 {{ adminHeader() }}
+{% set pageTitle = '%auth_method% settings'|trans({'%auth_method%': method.displayName}) %}
 <h3>
-    <span class="fas fa-wrench"></span>
-    {{ method.DisplayName }} {% trans %}Settings{% endtrans %}
-    {{ pageSetVar('title', method.DisplayName ~ ' ' ~ 'Settings'|trans) }}
+    <span class="fab fa-{{ method.alias }}"></span>
+    {{ pageTitle }}
+    {{ pageSetVar('title', pageTitle) }}
 </h3>
 
 <div>{{ include('@ZikulaOAuthModule/Config/' ~ method.alias ~ '.html.twig') }}</div>
 
 <div class="card bg-light my-3">
-    <div class="card-header">{{ method.DisplayName }} {% trans %}Settings{% endtrans %}</div>
+    <div class="card-header">{{ pageTitle }}</div>
     <div class="card-body">
         {{ form_start(form) }}
         {{ form_errors(form) }}

@@ -155,9 +155,9 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
                     $registrationUrl = $this->router->generate('zikulausersmodule_registration_register');
                     $this->session->remove('oauth2state');
                     $registerLink = '<a href="' . $registrationUrl . '">' . $this->translator->trans('create a new account') . '</a>';
-                    $errorMessage = $this->translator->trans('This user is not locally registered. You must first %registerLink on this site before logging in with %displayName', [
-                        '%registerLink' => $registerLink,
-                        '%displayName' => $this->getDisplayName()
+                    $errorMessage = $this->translator->trans('This user is not locally registered. You must first %registerLink% on this site before logging in with %displayName%', [
+                        '%registerLink%' => $registerLink,
+                        '%displayName%' => $this->getDisplayName()
                     ]);
                     $this->session->getFlashBag()->add('error', $errorMessage);
                 }

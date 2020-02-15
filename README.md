@@ -12,6 +12,7 @@ Currently implemented providers:
  - Facebook
  - GitHub
  - Google
+ - Instagram
  - LinkedIn
 
 ## Setting up the providers

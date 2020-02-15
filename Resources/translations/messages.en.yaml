@@ -30,7 +30,7 @@ LinkedIn: null
 'Invalid settings for LinkedIn OAuth provider.': null
 'Invalid State': null
 'create a new account': null
-'This user is not locally registered. You must first %registerLink on this site before logging in with %displayName': null
+'This user is not locally registered. You must first %registerLink% on this site before logging in with %displayName%': null
 'Could not obtain user details from external service.': null
 'User must authenticate first.': null
 Github: null
@@ -39,6 +39,6 @@ Github: null
 Facebook: null
 'Login using Facebook via OAuth.': null
 'Invalid settings for Facebook OAuth provider.': null
-'Settings for %method saved!': null
+'Settings for %method% saved!': null
 'Mapping list': null
 '%auth_method% settings': null

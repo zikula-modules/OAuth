@@ -65,10 +65,18 @@ class ExtensionMenu implements ExtensionMenuInterface
                 'route' => 'zikulaoauthmodule_mapping_list',
             ])->setAttribute('icon', 'fas fa-list');
 
+            $menu->addChild('Provider settings', [
+                'uri' => '#'
+            ])
+                ->setAttribute('icon', 'fas fa-wrench')
+                ->setAttribute('dropdown', true)
+            ;
+
             $methods = [
                 OAuthConstant::ALIAS_GITHUB,
-                OAuthConstant::ALIAS_GOOGLE,
                 OAuthConstant::ALIAS_FACEBOOK,
+                OAuthConstant::ALIAS_GOOGLE,
+                OAuthConstant::ALIAS_INSTAGRAM,
                 OAuthConstant::ALIAS_LINKEDIN
             ];
             foreach ($methods as $method) {
@@ -76,13 +84,13 @@ class ExtensionMenu implements ExtensionMenuInterface
                 if (null === $authMethod) {
                     continue;
                 }
-                $menu->addChild($method, [
+                $menu['Provider settings']->addChild($method, [
                     'route' => 'zikulaoauthmodule_config_settings',
                     'routeParameters' => ['method' => $method]
                 ])
                     ->setLabel('%auth_method% settings')
                     ->setExtra('translation_params', ['%auth_method%' => $authMethod->getDisplayName()])
-                    ->setAttribute('icon', 'fas fa-wrench')
+                    ->setAttribute('icon', 'fab fa-' . $method)
                 ;
             }
         }

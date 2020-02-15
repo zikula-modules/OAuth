@@ -1,0 +1,30 @@
+<div class="alert alert-info">
+    <p>{% trans %}Application setup at{% endtrans %}: <a href="https://www.instagram.com/developer/register/">https://www.instagram.com/developer/register/</a><br />
+    {% trans %}Create an Instagram account if you do not have one yet and log in to be able to proceed.{% endtrans %}</p>
+
+    <p>{% trans %}Developer Signup{% endtrans %}</p>
+    <ul>
+        <li>{% trans %}Your website{% endtrans %}: {{ app.request.host }}</li>
+        <li>{% trans %}Phone number{% endtrans %}: {% trans %}any phone number{% endtrans %}</li>
+        <li>{% trans %}What do you want to build with API{% endtrans %}: {% trans %}use Instagram for authenticating users{% endtrans %}</li>
+    </ul>
+
+    <p>{% trans %}Click on the "Register Your Application" button.{% endtrans %}</p>
+    <p>{% trans %}Click on the "Register a New Client" button.{% endtrans %}</p>
+
+    {% trans %}Register new Client ID{% endtrans %}:
+    <ul>
+        <li>{% trans %}Application name{% endtrans %}: <code>{{ getSystemVar('sitename', '') }}</code></li>
+        <li>{% trans %}Description{% endtrans %}: {% trans %}any short description{% endtrans %}</li>
+        <li>{% trans %}Website URL{% endtrans %}: <code>{{ url('zikulausersmodule_access_login') }}</code></li>
+        <li>{% trans %}Valid redirect URIs{% endtrans %}: <code>{{ url('zikulausersmodule_access_login') }}</code> + <code>{{ url('zikulausersmodule_registration_register') }}</code></li>
+        <li>{% trans %}Contact email{% endtrans %}: <code>{{ getSystemVar('adminmail') }}</code></li>
+    </ul>
+
+    {% trans %}Complete:{% endtrans %}:
+    <ul>
+        <li>{% trans %}Answer security question.{% endtrans %}</li>
+        <li>{% trans %}Click Register button.{% endtrans %}</li>
+        <li>{% trans %}Obtain the Client ID and Secret from the Manage Clients page.{% endtrans %}</li>
+    </ul>
+</div>

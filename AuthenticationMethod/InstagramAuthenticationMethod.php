@@ -13,25 +13,25 @@ declare(strict_types=1);
 
 namespace Zikula\OAuthModule\AuthenticationMethod;
 
-use League\OAuth2\Client\Provider\Facebook;
+use League\OAuth2\Client\Provider\Instagram;
 use Zikula\OAuthModule\Exception\InvalidProviderConfigException;
 use Zikula\OAuthModule\OAuthConstant;
 
-class FacebookAuthenticationMethod extends AbstractAuthenticationMethod
+class InstagramAuthenticationMethod extends AbstractAuthenticationMethod
 {
     public function getAlias(): string
     {
-        return OAuthConstant::ALIAS_FACEBOOK;
+        return OAuthConstant::ALIAS_INSTAGRAM;
     }
 
     public function getDisplayName(): string
     {
-        return $this->translator->trans('Facebook');
+        return $this->translator->trans('Instagram');
     }
 
     public function getDescription(): string
     {
-        return $this->translator->trans('Login using Facebook via OAuth.');
+        return $this->translator->trans('Login using Instagram via OAuth.');
     }
 
     public function getUname(): string
@@ -46,16 +46,15 @@ class FacebookAuthenticationMethod extends AbstractAuthenticationMethod
 
     protected function setProvider(string $redirectUri): void
     {
-        $settings = $this->variableApi->get('ZikulaOAuthModule', OAuthConstant::ALIAS_FACEBOOK);
+        $settings = $this->variableApi->get('ZikulaOAuthModule', OAuthConstant::ALIAS_INSTAGRAM);
         if (!isset($settings['id'], $settings['secret'])) {
-            throw new InvalidProviderConfigException($this->translator->trans('Invalid settings for Facebook OAuth provider.'));
+            throw new InvalidProviderConfigException($this->translator->trans('Invalid settings for Instagram OAuth provider.'));
         }
 
-        $this->provider = new Facebook([
+        $this->provider = new Instagram([
             'clientId' => $settings['id'],
             'clientSecret' => $settings['secret'],
-            'redirectUri' => $redirectUri,
-            'graphApiVersion' => 'v2.10'
+            'redirectUri' => $redirectUri
         ]);
     }
 }
