@@ -19,7 +19,7 @@
         "league/oauth2-github": "2.*",
         "league/oauth2-google": "3.*",
         "league/oauth2-instagram": "2.*",
-        "league/oauth2-linkedin": "5.*"
+        "league/oauth2-linkedin": "4.*"
     },
     "extra": {
         "zikula": {
