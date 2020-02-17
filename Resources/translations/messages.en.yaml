@@ -9,7 +9,26 @@
 'Click App Review in side menu.': null
 'Enable "Make Public".': null
 'Obtain the App ID and Secret from the Dashboard.': null
-Settings: null
+'Create an Instagram account if you do not have one yet and log in to be able to proceed.': null
+'Developer Signup': null
+'Your website': null
+'Phone number': null
+'any phone number': null
+'What do you want to build with API': null
+'use Instagram for authenticating users': null
+'Click on the "Register Your Application" button.': null
+'Click on the "Register a New Client" button.': null
+'Register new Client ID': null
+'Application name': null
+Description: null
+'any short description': null
+'Website URL': null
+'Valid redirect URIs': null
+'Contact email': null
+'Answer security question.': null
+'Click Register button.': null
+'Obtain the Client ID and Secret from the Manage Clients page.': null
+'%auth_method% settings': null
 'Set the': null
 'Add one': null
 'You must also enable the Google+ Api': null
@@ -25,6 +44,9 @@ Save: null
 Google: null
 'Login using Google via OAuth.': null
 'Invalid settings for Google OAuth provider.': null
+Instagram: null
+'Login using Instagram via OAuth.': null
+'Invalid settings for Instagram OAuth provider.': null
 LinkedIn: null
 'Login using LinkedIn via OAuth.': null
 'Invalid settings for LinkedIn OAuth provider.': null
@@ -41,4 +63,5 @@ Facebook: null
 'Invalid settings for Facebook OAuth provider.': null
 'Settings for %method% saved!': null
 'Mapping list': null
-'%auth_method% settings': null
+'Provider settings': null
+Settings: null
