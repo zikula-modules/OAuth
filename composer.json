@@ -14,7 +14,7 @@
         "psr-4": { "Zikula\\OAuthModule\\": "" }
     },
     "require": {
-        "php": ">=7.2.0",
+        "php": ">=7.2.5",
         "league/oauth2-facebook": "2.*",
         "league/oauth2-github": "2.*",
         "league/oauth2-google": "3.*",
@@ -26,14 +26,13 @@
             "core-compatibility": ">=3.0.0",
             "class": "Zikula\\OAuthModule\\ZikulaOAuthModule",
             "displayname": "OAuthModule",
+            "url": "oauth",
+            "icon": "fas fa-network-wired",
             "capabilities": {
                 "admin": {
-                    "route": "zikulaoauthmodule_config_settings",
-                    "icon": "fas fa-network-wired"
+                    "route": "zikulaoauthmodule_config_settings"
                 }
             },
-            "url": "oauth",
-            "oldnames": [],
             "securityschema": {
                 "ZikulaOAuthModule::": "::"
             }
