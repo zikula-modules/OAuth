@@ -15,13 +15,15 @@ namespace Zikula\OAuthModule\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Zikula\Bundle\CoreBundle\Controller\AbstractController;
 use Zikula\OAuthModule\Entity\Repository\MappingRepository;
+use Zikula\PermissionsModule\Annotation\PermissionCheck;
 use Zikula\ThemeModule\Engine\Annotation\Theme;
 
 /**
  * Class MappingController
+ *
+ * @PermissionCheck("admin")
  */
 class MappingController extends AbstractController
 {
@@ -29,15 +31,9 @@ class MappingController extends AbstractController
      * @Route("/list")
      * @Template("@ZikulaOAuthModule/Mapping/list.html.twig")
      * @Theme("admin")
-     *
-     * @throws AccessDeniedException
      */
     public function listAction(MappingRepository $mappingRepository): array
     {
-        if (!$this->hasPermission('ZikulaOAuthModule', '::', ACCESS_ADMIN)) {
-            throw new AccessDeniedException();
-        }
-
         return [
             'mappings' => $mappingRepository->findAll()
         ];
