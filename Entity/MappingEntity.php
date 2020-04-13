@@ -70,7 +70,7 @@ class MappingEntity
         return $this->methodId;
     }
 
-    public function setMethodId(string $methodId): void
+    public function setMethodId($methodId): void
     {
         $this->methodId = $methodId;
     }

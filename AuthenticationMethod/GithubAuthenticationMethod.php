@@ -66,9 +66,9 @@ class GithubAuthenticationMethod extends AbstractAuthenticationMethod
             $this->token->getToken()
         );
 
-        $emails = $this->getProvider()->getResponse($request);
+        $emails = $this->getProvider()->getParsedResponse($request);
         foreach ($emails as $email) {
-            if ($email['primary']) {
+            if (true === $email['primary']) {
                 $this->email = $email['email'];
             }
         }

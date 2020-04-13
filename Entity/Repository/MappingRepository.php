@@ -24,7 +24,7 @@ class MappingRepository extends ServiceEntityRepository
         parent::__construct($registry, MappingEntity::class);
     }
 
-    public function getZikulaId(string $method, string $methodId): ?int
+    public function getZikulaId(string $method, $methodId): ?int
     {
         $mapping = $this->findOneBy(['method' => $method, 'methodId' => $methodId]);
 

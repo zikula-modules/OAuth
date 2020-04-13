@@ -53,7 +53,8 @@ class GoogleAuthenticationMethod extends AbstractAuthenticationMethod
         $this->provider = new Google([
             'clientId' => $settings['id'],
             'clientSecret' => $settings['secret'],
-            'redirectUri' => $redirectUri
+            'redirectUri' => $redirectUri,
+            'scope' => 'openid email'
         ]);
     }
 }

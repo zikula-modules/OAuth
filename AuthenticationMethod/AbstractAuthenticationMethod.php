@@ -176,7 +176,7 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
         }
     }
 
-    public function getId(): int
+    public function getId()
     {
         if (!$this->user) {
             throw new LogicException($this->translator->trans('User must authenticate first.'));

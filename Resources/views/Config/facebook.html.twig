@@ -4,21 +4,24 @@
     <ul>
         <li>{% trans %}Click "+ Add a New App" button{% endtrans %}</li>
         <li>{% trans %}Choose a display name and enter your email. Click "Create App ID" and complete the Captcha.{% endtrans %}</li>
-        <li>{% trans %}Next to "Facebook Login" click "Get Started" button.{% endtrans %}</li>
+        <li>{% trans %}On the "Facebook Login" tile, click "Set Up".{% endtrans %}</li>
         <li>{% trans %}Do not do "QuickStart" - click the Settings link under Facebook Login in the menu on the left side.{% endtrans %}</li>
     </ul>
 
     {% trans %}Add two{% endtrans %} <code>Valid OAuth redirect URIs</code>:
-    <ul>
+    <ul class="{%  if app.request.scheme != 'https' %}bg-danger text-white{% endif %}">
         <li><code>{{ url('zikulausersmodule_access_login') }}</code></li>
         <li><code>{{ url('zikulausersmodule_registration_register') }}</code></li>
     </ul>
+    {%  if app.request.scheme != 'https' %}
+        <p class="pt-3 text-danger">{% trans %}Note: Facebook requires redirect URIs to implement https.{% endtrans %}</p>
+    {% endif %}
 
     {% trans %}Complete:{% endtrans %}:
     <ul>
         <li>{% trans %}Click Save button.{% endtrans %}</li>
         <li>{% trans %}Click App Review in side menu.{% endtrans %}</li>
-        <li>{% trans %}Enable "Make Public".{% endtrans %}</li>
-        <li>{% trans %}Obtain the App ID and Secret from the Dashboard.{% endtrans %}</li>
+        <li>{% trans %}Obtain the App ID and Secret from the Dashboard. Testing should work at this point.{% endtrans %}</li>
+        <li>{% trans %}Disable "In development" after testing is complete (this may require additional steps with Facebook).{% endtrans %}</li>
     </ul>
 </div>
