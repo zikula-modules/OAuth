@@ -1,4 +1,3 @@
-{{ adminHeader() }}
 {% set pageTitle = '%auth_method% settings'|trans({'%auth_method%': method.displayName}) %}
 <h3>
     <span class="fab fa-{{ method.alias }}"></span>
@@ -16,4 +15,3 @@
         {{ form_end(form) }}
     </div>
 </div>
-{{ adminFooter() }}
