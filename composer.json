@@ -1,6 +1,6 @@
 {
     "name": "zikula/oauth-module",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "description": "Integrates league/oauth2-client and various providers.",
     "type": "zikula-module",
     "license": "MIT",
