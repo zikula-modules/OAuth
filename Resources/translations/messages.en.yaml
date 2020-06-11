@@ -1,67 +1,67 @@
-'Application setup at': null
-'Click "+ Add a New App" button': null
-'Choose a display name and enter your email. Click "Create App ID" and complete the Captcha.': null
-'Next to "Facebook Login" click "Get Started" button.': null
-'Do not do "QuickStart" - click the Settings link under Facebook Login in the menu on the left side.': null
-'Add two': null
-'Complete:': null
-'Click Save button.': null
-'Click App Review in side menu.': null
-'Enable "Make Public".': null
-'Obtain the App ID and Secret from the Dashboard.': null
-'Create an Instagram account if you do not have one yet and log in to be able to proceed.': null
-'Developer Signup': null
-'Your website': null
-'Phone number': null
-'any phone number': null
-'What do you want to build with API': null
-'use Instagram for authenticating users': null
-'Click on the "Register Your Application" button.': null
-'Click on the "Register a New Client" button.': null
-'Register new Client ID': null
-'Application name': null
-Description: null
-'any short description': null
-'Website URL': null
-'Valid redirect URIs': null
-'Contact email': null
-'Answer security question.': null
-'Click Register button.': null
-'Obtain the Client ID and Secret from the Manage Clients page.': null
-'%auth_method% settings': null
-'Set the': null
-'Add one': null
-'You must also enable the Google+ Api': null
-'Check the box under "Default Application Permissions" for `r_basicprofile` and `r_emailaddress`': null
-'Mappings list': null
-Method: null
-MethodId: null
-ZikulaId: null
-'No items found.': null
-'Client id': null
-'Client secret': null
-Save: null
-Google: null
-'Login using Google via OAuth.': null
-'Invalid settings for Google OAuth provider.': null
-Instagram: null
-'Login using Instagram via OAuth.': null
-'Invalid settings for Instagram OAuth provider.': null
-LinkedIn: null
-'Login using LinkedIn via OAuth.': null
-'Invalid settings for LinkedIn OAuth provider.': null
-'Invalid State': null
-'create a new account': null
-'This user is not locally registered. You must first %registerLink% on this site before logging in with %displayName%': null
-'Could not obtain user details from external service.': null
-'User must authenticate first.': null
-Github: null
-'Login using Github via OAuth.': null
-'Invalid settings for Github OAuth provider.': null
-Facebook: null
-'Login using Facebook via OAuth.': null
-'Invalid settings for Facebook OAuth provider.': null
-'Settings for %method% saved!': null
-'Mapping list': null
-'Provider settings': null
-Settings: null
+'Application setup at': 'Application setup at'
+'Click "+ Add a New App" button': 'Click "+ Add a New App" button'
+'Choose a display name and enter your email. Click "Create App ID" and complete the Captcha.': 'Choose a display name and enter your email. Click "Create App ID" and complete the Captcha.'
+'Next to "Facebook Login" click "Get Started" button.': 'Next to "Facebook Login" click "Get Started" button.'
+'Do not do "QuickStart" - click the Settings link under Facebook Login in the menu on the left side.': 'Do not do "QuickStart" - click the Settings link under Facebook Login in the menu on the left side.'
+'Add two': 'Add two'
+'Complete:': 'Complete:'
+'Click Save button.': 'Click Save button.'
+'Click App Review in side menu.': 'Click App Review in side menu.'
+'Enable "Make Public".': 'Enable "Make Public".'
+'Obtain the App ID and Secret from the Dashboard.': 'Obtain the App ID and Secret from the Dashboard.'
+'Create an Instagram account if you do not have one yet and log in to be able to proceed.': 'Create an Instagram account if you do not have one yet and log in to be able to proceed.'
+'Developer Signup': 'Developer Signup'
+'Your website': 'Your website'
+'Phone number': 'Phone number'
+'any phone number': 'any phone number'
+'What do you want to build with API': 'What do you want to build with API'
+'use Instagram for authenticating users': 'use Instagram for authenticating users'
+'Click on the "Register Your Application" button.': 'Click on the "Register Your Application" button.'
+'Click on the "Register a New Client" button.': 'Click on the "Register a New Client" button.'
+'Register new Client ID': 'Register new Client ID'
+'Application name': 'Application name'
+Description: Description
+'any short description': 'any short description'
+'Website URL': 'Website URL'
+'Valid redirect URIs': 'Valid redirect URIs'
+'Contact email': 'Contact email'
+'Answer security question.': 'Answer security question.'
+'Click Register button.': 'Click Register button.'
+'Obtain the Client ID and Secret from the Manage Clients page.': 'Obtain the Client ID and Secret from the Manage Clients page.'
+'%auth_method% settings': '%auth_method% settings'
+'Set the': 'Set the'
+'Add one': 'Add one'
+'You must also enable the Google+ Api': 'You must also enable the Google+ Api'
+'Check the box under "Default Application Permissions" for `r_basicprofile` and `r_emailaddress`': 'Check the box under "Default Application Permissions" for `r_basicprofile` and `r_emailaddress`'
+'Mappings list': 'Mappings list'
+Method: Method
+MethodId: MethodId
+ZikulaId: ZikulaId
+'No items found.': 'No items found.'
+'Client id': 'Client id'
+'Client secret': 'Client secret'
+Save: Save
+Google: Google
+'Login using Google via OAuth.': 'Login using Google via OAuth.'
+'Invalid settings for Google OAuth provider.': 'Invalid settings for Google OAuth provider.'
+Instagram: Instagram
+'Login using Instagram via OAuth.': 'Login using Instagram via OAuth.'
+'Invalid settings for Instagram OAuth provider.': 'Invalid settings for Instagram OAuth provider.'
+LinkedIn: LinkedIn
+'Login using LinkedIn via OAuth.': 'Login using LinkedIn via OAuth.'
+'Invalid settings for LinkedIn OAuth provider.': 'Invalid settings for LinkedIn OAuth provider.'
+'Invalid State': 'Invalid State'
+'create a new account': 'create a new account'
+'This user is not locally registered. You must first %registerLink% on this site before logging in with %displayName%': 'This user is not locally registered. You must first %registerLink% on this site before logging in with %displayName%'
+'Could not obtain user details from external service.': 'Could not obtain user details from external service.'
+'User must authenticate first.': 'User must authenticate first.'
+Github: Github
+'Login using Github via OAuth.': 'Login using Github via OAuth.'
+'Invalid settings for Github OAuth provider.': 'Invalid settings for Github OAuth provider.'
+Facebook: Facebook
+'Login using Facebook via OAuth.': 'Login using Facebook via OAuth.'
+'Invalid settings for Facebook OAuth provider.': 'Invalid settings for Facebook OAuth provider.'
+'Settings for %method% saved!': 'Settings for %method% saved!'
+'Mapping list': 'Mapping list'
+'Provider settings': 'Provider settings'
+Settings: Settings
