@@ -113,6 +113,7 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
 
     public function authenticate(array $data = []): ?int
     {
+        $authenticateWhile = isset($data['redirectUri']) ? 'registration' : 'login';
         $redirectUri = $data['redirectUri'] ?? $this->router->generate('zikulausersmodule_access_login', [], UrlGeneratorInterface::ABSOLUTE_URL);
         $this->setProvider($redirectUri);
         $request = $this->requestStack->getCurrentRequest();
@@ -149,7 +150,7 @@ abstract class AbstractAuthenticationMethod implements ReEntrantAuthenticationMe
             $this->setAdditionalUserData();
             $uid = $this->repository->getZikulaId($this->getAlias(), $this->user->getId());
             if (null !== $this->session) {
-                if (isset($uid)) {
+                if (isset($uid) || 'registration' === $authenticateWhile) {
                     //$this->session->getFlashBag()->add('success', sprintf('Hello %s!', $this->getUname()));
                 } else {
                     $registrationUrl = $this->router->generate('zikulausersmodule_registration_register');
