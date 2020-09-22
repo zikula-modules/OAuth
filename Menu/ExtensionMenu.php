@@ -62,7 +62,7 @@ class ExtensionMenu implements ExtensionMenuInterface
         $menu = $this->factory->createItem('oauthAdminMenu');
         if ($this->permissionApi->hasPermission('ZikulaOAuthModule::', '::', ACCESS_ADMIN)) {
             $menu->addChild('Mapping list', [
-                'route' => 'zikulaoauthmodule_mapping_list',
+                'route' => 'zikulaoauthmodule_mapping_listmappings',
             ])->setAttribute('icon', 'fas fa-list');
 
             $menu->addChild('Provider settings', [
