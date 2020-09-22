@@ -32,7 +32,7 @@ class MappingController extends AbstractController
      * @Template("@ZikulaOAuthModule/Mapping/list.html.twig")
      * @Theme("admin")
      */
-    public function listAction(MappingRepository $mappingRepository): array
+    public function listMappings(MappingRepository $mappingRepository): array
     {
         return [
             'mappings' => $mappingRepository->findAll()

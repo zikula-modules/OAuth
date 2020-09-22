@@ -33,7 +33,7 @@ class ConfigController extends AbstractController
      * @Template("@ZikulaOAuthModule/Config/settings.html.twig")
      * @Theme("admin")
      */
-    public function settingsAction(
+    public function settings(
         Request $request,
         AuthenticationMethodCollector $authenticationMethodCollector,
         string $method = 'github'
