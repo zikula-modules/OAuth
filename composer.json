@@ -37,5 +37,13 @@
                 "ZikulaOAuthModule::": "::"
             }
         }
+    },
+    "config": {
+        "vendor-dir": "vendor",
+        "platform": {
+            "php": "7.2.5"
+        },
+        "preferred-install": "dist",
+        "optimize-autoloader": true
     }
 }
