@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3472ccaeb615b2bf48a4e54f8af986f0",
+    "content-hash": "7d930776f2aad3dc398d9f6fafecc7b1",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -578,22 +578,23 @@
         },
         {
             "name": "league/oauth2-linkedin",
-            "version": "4.1.1",
+            "version": "5.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/oauth2-linkedin.git",
-                "reference": "0dfb338db84cb87c3d24b0205ec7f3e3a9457b81"
+                "reference": "f9ab661ca37884067ca286412b6c17304d3c2fac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/oauth2-linkedin/zipball/0dfb338db84cb87c3d24b0205ec7f3e3a9457b81",
-                "reference": "0dfb338db84cb87c3d24b0205ec7f3e3a9457b81",
+                "url": "https://api.github.com/repos/thephpleague/oauth2-linkedin/zipball/f9ab661ca37884067ca286412b6c17304d3c2fac",
+                "reference": "f9ab661ca37884067ca286412b6c17304d3c2fac",
                 "shasum": ""
             },
             "require": {
                 "league/oauth2-client": "^2.0"
             },
             "require-dev": {
+                "ext-json": "*",
                 "mockery/mockery": "~0.9",
                 "phpunit/phpunit": "~4.0",
                 "squizlabs/php_codesniffer": "~2.0"
@@ -631,9 +632,9 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/oauth2-linkedin/issues",
-                "source": "https://github.com/thephpleague/oauth2-linkedin/tree/master"
+                "source": "https://github.com/thephpleague/oauth2-linkedin/tree/5.1.2"
             },
-            "time": "2018-07-23T15:43:54+00:00"
+            "time": "2020-04-20T13:59:44+00:00"
         },
         {
             "name": "paragonie/random_compat",
